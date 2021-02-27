@@ -1,0 +1,678 @@
+version: '3.4'
+
+#enabled
+#0-O
+#airsonic;aria2;baidupcs;calibre;clash;gogs;jellyfin;kms;mariadb;miniflux;nextcloud;ourobos
+
+#P-Z
+#phpmyadmin;piwigo;portainer;postgres;qbittorrent;redis;seafile;shaarli;traefik;ttrss;unifi;wallabag;wordpress;zabbix;
+
+
+#disabled
+#selfoss,web,seafile2;watchtower
+
+services:
+
+  airsonic:
+    image: airsonic/airsonic
+    container_name: airsonic_sub
+    restart: unless-stopped
+    environment:
+      CONTEXT_PATH: /airsonic/
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/airsonic/data:/airsonic/data
+      - /mnt/bak/docker/airsonic/playlists:/airsonic/playlists
+      - /mnt/bak/docker/airsonic/podcasts:/airsonic/podcasts
+      - /mnt/zfs/share/downloads/music:/airsonic/music
+    ports:
+      - "4040:4040"
+    networks:
+      - default
+
+  aria2:
+    image: wahyd4/aria2-ui
+    restart: unless-stopped
+    container_name: aria2_sub
+    ports:
+      - "6880:80"
+      - "6800:6800"
+      - "16800:443"
+    environment:
+      - ENABLE_AUTH=true
+      - ARIA2_USER=user
+      - ARIA2_PWD=mypassword
+      - RPC_SECRET=downloads
+    volumes:
+      - /mnt/zfs/share/downloads/aria2:/data
+  #    - /mnt/bak/docker/aria2:/root/conf
+      - /mnt/bak/docker/shared:/shared:ro
+
+  baidupcs:
+    image: auska/docker-baidupcs
+    container_name: baidupcs_sub
+    restart: unless-stopped
+    environment:
+      - PGID=1002
+      - PUID=1002
+      - TZ='Asia/Shanghai'
+    ports:
+#      - "9999:999"
+      - "1999:1999"
+    volumes:
+      - /mnt/zfs/share/downloads/baidu/downloads:/mnt
+#      - /mnt/zfs/share/downloads/baidu/config:/defaults
+    networks:
+      - default
+
+  calibre:
+    image: technosoft2000/calibre-web
+    container_name: calibre_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1002
+      - PGID=1002
+      - USE_CONFIG_DIR=true
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    volumes:
+      - /mnt/bak/docker/calibre/books:/books
+      - /etc/localtime:/etc/localtime:ro
+      - ${USERDIR}/shared:/shared:ro
+    ports:
+      - "8083:8083"
+    networks:
+      - default
+
+  clash:
+    image: dreamacro/clash
+    container_name: clash_sub
+    restart: unless-stopped
+    volumes:
+      - /mnt/bak/docker/clash:/root/.config/clash
+    ports:
+      - "8118:8118"
+      - "7891:7891"
+    networks:
+      - default
+    # If you need external controller, you can export this port.
+    # - "8080:8080"
+    # When your system is Linux, you can use `network_mode: "host"` directly.
+    #network_mode: "host"
+    #network_mode: "bridge"
+
+  gogs:
+    image: gogs/gogs
+    container_name: gogs_sub
+    restart: unless-stopped
+    ports:
+      - "10022:10022"
+      - "3000:3000"
+    environment:
+      - TZ='Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/gogs:/data
+      - ${USERDIR}/shared:/shared:ro
+#    networks:
+#      - default
+#      - traefik_proxy
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.backend=gogs"
+#      - "traefik.frontend.rule=Host:git.mydomain.com"
+##      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /gogs"
+#      - "traefik.port=3000"
+#      - "traefik.docker.network=traefik_proxy"
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin_sub
+    restart: unless-stopped
+    environment:
+      UID: 1002
+      GID: 1002
+      GID: 1002
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/jellyfin/config:/config
+      - /mnt/bak/docker/jellyfin/cache:/cache
+      - /mnt/zfs/share/downloads/movie:/mnt/movie
+      - /mnt/zfs/share/downloads/tv:/mnt/tv
+#      - /mnt/zfs/share/photo:/mnt/photo
+      - ${USERDIR}/shared:/shared:ro
+    ports:
+      - "8920:8920"
+#      - "8096:8096"
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=jellyfin"
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /jellyfin"
+      - "traefik.port=8920"
+#      - "traefik.docker.network=traefik_proxy"
+      - "traefik.protocol=https"
+      - "traefik.frontend.headers.SSLRedirect=true" - "traefik.frontend.headers.STSSeconds=315360000"
+
+  kms:
+    image: mikolatero/vlmcsd
+    restart: unless-stopped
+    container_name: kms_sub
+    ports:
+      - "1688:1688"
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb_sub
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/mariadb:/var/lib/mysql  
+
+  miniflux:
+    image: miniflux/miniflux:latest
+    restart: unless-stopped
+    container_name: miniflux_sub
+    ports:
+      - "810:8080"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
+      - BASE_URL=https://www.mydomain.com:443/miniflux/
+      - RUN_MIGRATIONS=1
+      - CERT_FILE=/shared/crt/mydomain.com/mydomain.com.cer
+      - KEY_FILE=shared/crt/mydomain.com/mydomain.com.key
+      - POLLING_FREQUENCY=60
+      - ARCHIVE_READ_DAYS=30
+      - CLEANUP_FREQUENCY=30
+    volumes:
+      - /mnt/bak/docker/shared:/shared:ro
+
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud_sub
+    restart: unless-stopped
+    links:
+      - mariadb
+      - redis
+    environment:
+      - MYSQL_PASSWORD=mypassword
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud_admin
+      - TZ='Asia/Shanghai'
+#    ports:
+#      - "803:80"
+    volumes:
+      - /mnt/bak/docker/nextcloud:/var/www/html
+      - /mnt/zfs/share:/mnt/share:ro
+      - /mnt/zfs/share/downloads/torrents:/mnt/torrents
+      - ${USERDIR}/shared:/shared
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=nextcloud"
+      - "traefik.frontend.rule=Host:nc.mydomain.com,openthought.duckdns.org"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+#    command: ["/shared/wait-for-it.sh", "mariadb:3306"]
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_sub
+    restart: unless-stopped
+    links:
+      - mariadb
+    environment:
+      PMA_HOST: mariadb
+      TZ: 'Asia/Shanghai'
+#    ports:
+#      - "804:80"
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=phpmyadmin"
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /phpmyadmin"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+
+  piwigo:
+    image: mathieuruellan/piwigo
+    container_name: piwigo_sub
+    restart: unless-stopped
+    links:
+      - mariadb
+#    ports:
+#      - "807:80"
+    environment:
+      - TZ='Asia/Shanghai'
+    volumes:
+    #  - ${USERDIR}/piwigo/data/galleries:/var/www/galleries
+      - ${USERDIR}/piwigo/data/local:/var/www/local      - ${USERDIR}/piwigo/data/plugins:/var/www/plugins
+      - ${USERDIR}/piwigo/data/themes:/var/www/themes
+      - ${USERDIR}/piwigo/cache:/var/www/_data/i
+      - ${USERDIR}/piwigo/upload:/var/www/upload
+      - /mnt/photo:/var/www/galleries
+      - /var/log
+      - /var/log/piwigo:/var/log/apache2
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=piwigo"
+      - "traefik.frontend.rule=Host:piwigo.mydomain.com"
+    #  - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /piwigo"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+    command: ["/var/www/galleries/wait-for-it.sh", "mariadb:3306"]
+
+  portainer:
+    image: portainer/portainer
+    container_name: portainer_sub
+    restart: unless-stopped
+    command: -H unix:///var/run/docker.sock
+#    ports:
+#      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${USERDIR}/portainer/data:/data
+      - ${USERDIR}/shared:/shared
+    environment:
+      - TZ=${TZ}
+    networks:
+    # - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=portainer"
+#      - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /portainer"
+      - "traefik.port=9000"
+      - "traefik.docker.network=traefik_proxy"
+      - "traefik.frontend.headers.SSLRedirect=true" - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=docker.mydomain.com"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+
+  postgres:
+    image: postgres
+    container_name: postgres_sub
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/postgres:/var/lib/postgresql/data  
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1002
+      - PGID=1002
+      - WEBUI_PORT=16888
+      - UMASK_SET=002
+      - TZ='Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/qbittorrent/config:/config
+      - /mnt/zfs/share/downloads/torrents:/torrents      - /mnt/zfs/share/downloads/movie:/downloads/movie
+      - /mnt/zfs/share/downloads/tv:/downloads/tv
+      - /mnt/zfs/share/abc:/downloads/abc
+    ports:
+      - "16881:6881"
+      - "16881:6881/udp"
+      - "16888:16888"
+#    networks:
+#      - default
+#      - traefik_proxy
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.backend=qbittorrent"
+#      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /qbit"
+#      - "traefik.port=6888"
+#      - "traefik.docker.network=traefik_proxy"
+
+  redis:
+    image: redis
+    restart: unless-stopped
+    container_name: redis_sub
+    environment:
+      TZ: 'Asia/Shanghai'
+
+  seafile:
+    image: seafileltd/seafile
+    container_name: seafile_sub
+    restart: unless-stopped
+#  links:
+#    - mariadb
+#    - redis
+    environment:
+      - SEAFILE_SERVER_HOSTNAME=seafile.mydomain.com      - TZ='Asia/Shanghai'
+#    ports:
+#      - "880:80"
+#      - "8443:443"
+    volumes:
+      - /mnt/bak/docker/seafile:/shared
+    networks:
+#      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=seafile"
+      - "traefik.frontend.rule=Host:seafile.mydomain.com,seafile.duckdns.org"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+    #command: ["/var/www/html/wait-for-it.sh", "mariadb:3306"]
+
+  shaarli:
+    image: shaarli/shaarli
+    container_name: shaarli_sub
+    restart: unless-stopped
+    environment:
+      - TZ='Asia/Shanghai'
+    volumes:
+      - /mnt/bak/docker/shaarli/data:/var/www/shaarli/data
+#    ports:
+#      - "800:80"
+    networks:
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+    # - "traefik.backend=blog"
+#      - "traefik.frontend.rule=Host:${DOMAINNAME}"      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /shaarli"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+#  command: ["/var/www/shaarli/data/wait-for-it.sh", "traefik:80"]
+
+  traefik:
+    hostname: traefik
+    image: traefik
+    container_name: traefik_sub
+    restart: always
+    domainname: ${DOMAINNAME}
+    networks:
+      - default
+      - traefik_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+#      - "18080:8080"
+    environment:
+      - TZ='Asia/Shanghai'
+#      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
+#      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}
+    labels:
+      - "traefik.enable=true"
+#      - "traefik.backend=traefik"
+#      - "traefik.frontend.rule=Host:traefik.${DOMAINNAME}"  
+#      - "traefik.frontend.rule=Host:${DOMAINNAME}"      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /traefik"
+      - "traefik.frontend.auth.basic=admin:password/"
+      - "traefik.port=8080"
+      - "traefik.docker.network=traefik_proxy"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${USERDIR}/traefik:/etc/traefik
+      - ${USERDIR}/shared:/shared
+
+  ttrss:
+    image: linuxserver/tt-rss
+    container_name: ttrss_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1002
+      - PGID=1002
+      - TZ=Asia/Shanghai
+      - SELF_URL_PATH=http://docker.mydomain.com/ttrss
+    volumes:
+      - /mnt/bak/docker/ttrss:/config
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=ttrss"
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /ttrss"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+
+  unifi:
+    image: jacobalberty/unifi:stable
+    container_name: unifi_sub
+    restart: unless-stopped
+    ports:
+      - 8443:8443
+      - 8080:8080
+      - 3478:3478/udp
+      - 6789:6789
+      - 10001:10001/udp
+    environment:
+      - RUNAS_UID0=false
+      - TZ=Asia/Shanghai
+    volumes:
+      - /mnt/bak/docker/unifi:/unifi
+#    networks:
+#      - traefik_proxy
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.tags=frontend"
+#      - "traefik.frontend.passHostHeader=true"
+#      - "traefik.admin.backend=unifi"
+#      - "traefik.admin.frontend.rule=Host:unifi.mydomain.com"
+#      - "traefik.admin.port=8443"
+#      - "traefik.admin.protocol=https"
+
+
+  ouroboros:
+    image: pyouroboros/ouroboros
+    container_name: ouroboros_sub
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Shanghai
+      - LOG_LEVEL=info
+      - INTERVAL=36000
+      - SELF_UPDATE=true
+      - CLEANUP=true
+      - NOTIFIERS="mailtos://mydomain.com:587?user=notify@mydomain.com&pass=mypassword&smtp=192.168.6.98&to=user@mydomain.com"
+      - REPO_USER=user
+      - REPO_PASS=mypassword
+      - IGNORE="clash_sub mail_sub mariadb_sub phpmyadmin_sub qbittorrent_sub"
+
+#  watchtower:
+#    image: v2tec/watchtower
+#    container_name: watchtower_sub
+#    restart: unless-stopped
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /etc/timezone:/etc/timezone:ro
+#      - /etc/localtime:/etc/localtime:ro
+##      - /mnt/bak/docker/watchtower/config.json:/config.json:ro
+#    environment:
+#      - WATCHTOWER_NOTIFICATIONS=email
+#      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=watchtower@mydomain.com
+#      - WATCHTOWER_NOTIFICATION_EMAIL_TO=xxx@mydomain.com
+#      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=mail.mydomain.com
+#      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=notify@mydomain.com
+#      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=mypassword
+#    #command: --cleanup --interval 3600
+#    command: airsonic_sub baidupcs_sub calibre_sub jellyfin_sub miniflux_sub nextcloud_sub postgres_sub redis_sub seafile_sub shaarli_sub ttrss_sub unifi_sub wallabag_sub watchtower_sub --cleanup --interval 36000
+
+  wallabag:
+    image: wallabag/wallabag
+    container_name: wallabag_sub
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypassword
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=mariadb
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag_admin
+      - SYMFONY__ENV__DATABASE_PASSWORD=mypassword
+      - SYMFONY__ENV__MAILER_HOST=192.168.6.98
+      - SYMFONY__ENV__MAILER_USER=notify@mydomain.com
+      - SYMFONY__ENV__MAILER_PASSWORD=mypassword      - SYMFONY__ENV__FROM_EMAIL=notify@mydomain.com      - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.mydomain.com:443
+      - TZ='Asia/Shanghai'
+#    ports:
+#      - "802:80"
+    depends_on:
+      - mariadb
+      - redis
+    volumes:
+      - /mnt/bak/docker/wallabag/images:/var/www/wallabag/web/assets/images
+      - ${USERDIR}/shared:/shared
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+    # - "traefik.backend=blog"
+      - "traefik.frontend.rule=Host:wallabag.mydomain.com"
+    # - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /wallabag"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+    #not working bash
+  # command: ["/shared/wait-for.sh", "mariadb:3306"]
+  # stdin_open: true
+  # tty: true
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress_sub
+    restart: unless-stopped
+    links:
+      - mariadb
+#    ports:
+#      - "806:80"
+    environment:
+      - TZ='Asia/Shanghai'
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=wordpress_admin
+      - WORDPRESS_DB_PASSWORD=mypassword
+      - WORDPRESS_DB_HOST=mariadb
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - /mnt/bak/docker/wordpress:/var/www/html
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=blog"
+#      - "traefik.frontend.rule=Host:${DOMAINNAME}"#      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /traefik"
+      - "traefik.frontend.rule=Host:blog.mydomain.com"
+      - "traefik.port=80"
+      - "traefik.docker.network=traefik_proxy"
+
+  zabbix:
+    image: zabbix/zabbix-server-mysql:alpine-3.0-latest
+    restart: unless-stopped
+    container_name: zabbix_sub
+    links:
+      - mariadb
+    networks:
+      default:
+        ipv4_address: 172.18.0.99
+    ports:
+      - "10051:10051"
+    environment:
+      DB_SERVER_HOST: "mariadb"
+      MYSQL_USER: "zabbix_admin"
+      MYSQL_PASSWORD: "mypassword"
+      MYSQL_DATABASE: "zabbix"
+    volumes:
+      - /mnt/bak/docker/zabbix/alertscripts:/usr/lib/zabbix/alertscripts
+      - /mnt/bak/docker/zabbix/externalscripts:/usr/lib/zabbix/externalscripts
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+
+
+
+#  selfoss:
+#    image: hardware/selfoss
+#    container_name: selfoss_sub
+#    restart: unless-stopped
+#    environment:
+#      TZ: 'Asia/Shanghai'
+#    volumes:
+#      - /mnt/bak/docker/selfoss:/selfoss/data
+#    ports:
+#      - "801:8888"
+#    networks:
+#      - default
+#      - traefik_proxy
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.backend=selfoss"
+#      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /selfoss"
+#      - "traefik.port=80"
+#      - "traefik.docker.network=traefik_proxy"
+
+
+
+#  web:
+#    image: nimmis/apache-php7
+#    container_name: web_sub
+#    restart: "no"
+#    environment:
+#      TZ: 'Asia/Shanghai'
+#    links:
+#      - mariadb
+#    volumes:
+#      - /mnt/bak/docker/webhtml:/var/www/html
+#    ports:
+#      - "805:80"
+#      - "4435:443"
+#      - "traefik.docker.network=traefik_proxy"
+#      - "traefik.frontend.headers.SSLRedirect=true"
+#      - "traefik.frontend.headers.STSSeconds=315360000"
+#      - "traefik.frontend.headers.browserXSSFilter=true"
+#      - "traefik.frontend.headers.contentTypeNosniff=true"
+#      - "traefik.frontend.headers.forceSTSHeader=true"
+#      - "traefik.frontend.headers.SSLHost=unifi.mydomain.com"
+#      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+#      - "traefik.frontend.headers.STSPreload=true"#      - "traefik.frontend.headers.frameDeny=true"
+
+
+
+#  seafile2:
+#    image: seafileltd/seafile:latest
+#    container_name: seafile2_sub
+#    restart: unless-stopped
+#    environment:
+#      - SEAFILE_SERVER_LETSENCRYPT=true
+#      - SEAFILE_SERVER_HOSTNAME=seafile.mydomain.com
+#      - SEAFILE_ADMIN_EMAIL=xxxx@mydomain.com
+#      - SEAFILE_SERVER_HTTPS_PORT=8443
+#      - SEAFILE_ADMIN_PASSWORD=testtest
+#      - TZ='Asia/Shanghai'
+#    ports:
+#      - "880:80"
+#      - "8443:443"
+#    volumes:
+#      - /mnt/bak/docker/seafile2:/shared
+#    networks:
+#      - default
