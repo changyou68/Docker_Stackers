@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  code-server:
+    image: ghcr.io/linuxserver/code-server
+    container_name: code-server_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /mnt/dataCT/vsCode:/config
+    ports:
+      - 8443:8443
+
+  ouroboros:
+    image: pyouroboros/ouroboros
+    container_name: ouroboros_sub
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=America/New_York
+      - LOG_LEVEL=info
+      - INTERVAL=36000
+      - SELF_UPDATE=true
+      - CLEANUP=true
+#      - NOTIFIERS="mailtos://mydomain.com:587?user=notify@mydomain.com&pass=mypassword&smtp=192.168.6.98&to=user@mydomain.com"
+#      - IGNORE="clash_sub mail_sub mariadb_sub phpmyadmin_sub qbittorrent_sub"
+
+  dozzle:
+    container_name: dozzle_sub
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+  heimdall:
+    image: ghcr.io/linuxserver/heimdall
+    container_name: heimdall_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/config/heimdall:/config
+    ports:
+      - 8000:80
+      - 8441:443
