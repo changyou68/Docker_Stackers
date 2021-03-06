@@ -78,6 +78,7 @@ services:
      
   jdownloader-2:
     image: jlesage/jdownloader-2
+    container_name: jdownloader-2_sub
     restart: unless-stopped
     environment:
       - PUID=1001
