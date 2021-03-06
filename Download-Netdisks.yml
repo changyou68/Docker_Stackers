@@ -65,16 +65,16 @@ services:
     environment:
       - PUID=1001
       - PGID=113
-      - WEBUI_PORT=6881
+      - WEBUI_PORT=6885
       - UMASK=002
       - TZ=America/New_York
     volumes:
       - /home/docker/config/qbittorrent:/config     
       - /mnt/dataCT/qbittorrent:/downloads
     ports:
-      - "6882:6882"
-      - "6882:6882/udp"
-      - "6881:6881" 
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "6885:6885" 
      
   jdownloader-2:
     image: jlesage/jdownloader-2
