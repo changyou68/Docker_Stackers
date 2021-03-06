@@ -84,6 +84,7 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+      - ENABLE_CJK_FONT=1
     ports:
       - 5800:5800
     volumes:
