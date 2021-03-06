@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   Aria2-Pro:
     container_name: aria2-pro_sub
     image: p3terx/aria2-pro
@@ -76,3 +75,16 @@ services:
       - "6882:6882"
       - "6882:6882/udp"
       - "6881:6881" 
+     
+  jdownloader-2:
+    image: jlesage/jdownloader-2
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    ports:
+      - 5800:5800
+    volumes:
+      - /home/docker/config/JDownloader-2:/config:rw
+      - /mnt/dataCT/JDownloader-2:/output:rw 
