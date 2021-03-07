@@ -13,6 +13,7 @@ services:
     volumes:
       - /home/docker/config/jellyfin:/config
       - /mnt/dataCT/cache/jellyfin:/cache
+      - /mnt/dataCT/jellyfin/:/media
       - /mnt/dataCT/jellyfin/movies:/media/movies
       - /mnt/dataCT/jellyfin/taotao:/media/taotao
       - /mnt/dataCT/jellyfin/web:/media/web
