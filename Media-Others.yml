@@ -13,7 +13,11 @@ services:
     volumes:
       - /home/docker/config/jellyfin:/config
       - /mnt/dataCT/cache/jellyfin:/cache
-      - /mnt/dataCT/aria2/movies:/data/movies
+      - /mnt/dataCT/jellyfin/movies:/data/movies
+      - /mnt/dataCT/jellyfin/taotao:/data/taotao
+      - /mnt/dataCT/jellyfin/youtube:/data/youtube
+      - /mnt/dataCT/jellyfin/sounds:/data/sounds
+      - /mnt/dataCT/jellyfin/tv:/data/tv
     ports:
       - 8096:8096
       - 8920:8920 #optional
