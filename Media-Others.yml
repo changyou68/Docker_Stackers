@@ -29,8 +29,8 @@ services:
     container_name: embyserver_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=103
+      - UID=1001
+      - GID=103
       - TZ=America/New_York
     volumes:
       - /home/docker/config/emby:/config
