@@ -25,12 +25,12 @@ services:
       - 1900:1900/udp #optional
   
   emby:
-    image: emby/embyserver
+    image: ghcr.io/linuxserver/emby
     container_name: embyserver_sub
     restart: unless-stopped
     environment:
-      - UID=1001
-      - GID=113
+      - PUID=1001
+      - PGID=113
       - TZ=America/New_York
     volumes:
       - /home/docker/config/emby:/config
