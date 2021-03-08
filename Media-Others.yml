@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
     environment:
       - UID=1001
-      - GID=103
+      - GID=113
       - TZ=America/New_York
     volumes:
       - /home/docker/config/emby:/config
