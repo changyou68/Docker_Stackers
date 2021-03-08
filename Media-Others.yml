@@ -25,18 +25,18 @@ services:
       - 1900:1900/udp #optional
   
   emby:
-    image: ghcr.io/linuxserver/emby
+    image: emby/embyserver
     container_name: embyserver_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=113
+      - UID=1001
+      - GID=113
       - TZ=America/New_York
     volumes:
       - /home/docker/config/emby:/config
 #      - /mnt/dataCT/jellyfin/movies:/mnt/movies
       - /mnt/dataCT/jellyfin:/mnt/media
     ports:
-      - 8097:8097
-      - 8921:8921
+      - 8097:8096
+      - 8921:8920
       
