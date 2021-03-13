@@ -64,7 +64,7 @@ services:
 #      - CLI_ARGS= #optional
     volumes:
       - /home/docker/config/duplicati:/config
-      - /home/docker/config/duplicati/data:/data
+      - /home/docker/duplicati:/data
       - /mnt/sda/duplicati_backup:/backups
       - /home/docker:/source
     ports:
