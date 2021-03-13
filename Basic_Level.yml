@@ -52,3 +52,20 @@ services:
     ports:
       - 8000:80
       - 8441:443
+
+  duplicati:
+    image: duplicati/duplicati
+    container_name: duplicati
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+#      - CLI_ARGS= #optional
+    volumes:
+      - /home/docker/config/duplicati:/config
+      - /mnt/sda/duplicati_backup:/backups
+      - /home/docker:/source
+    ports:
+      - 8200:8200
+  
