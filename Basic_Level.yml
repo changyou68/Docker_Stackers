@@ -55,7 +55,7 @@ services:
 
   duplicati:
     image: duplicati/duplicati
-    container_name: duplicati
+    container_name: duplicati_sub
     restart: unless-stopped
     environment:
       - PUID=1001
