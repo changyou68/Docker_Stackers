@@ -68,4 +68,3 @@ services:
       - /home/docker:/source
     ports:
       - 8200:8200
-  
