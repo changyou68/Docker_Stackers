@@ -66,7 +66,6 @@ services:
       - PUID=1001
       - PGID=113
       - WEBUI_PORT=6885
-      - UMASK=002
       - TZ=America/New_York
     volumes:
       - /home/docker/config/qbittorrent:/config     
@@ -90,3 +89,25 @@ services:
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
       - /mnt/dataCT/JDownloader-2:/output:rw 
+
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+#      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+#      - USER=username #optional
+#      - PASS=password #optional
+#      - WHITELIST=iplist #optional
+    volumes:
+      - /home/docker/config/transmission:/config
+      - /mnt/dataCT/transmission:/downloads
+      - /mnt/dataCT/transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51515:51515
+      - 51515:51515/udp
+    
