@@ -22,8 +22,8 @@ services:
     network_mode: bridge
     ports:
       - 6800:6800
-      - 6888:6888
-      - 6888:6888/udp
+      - 34601:6888
+      - 34601:6888/udp
 # Since Aria2 will continue to generate logs, limit the log size to 1M to prevent your hard disk from running out of space.
     logging:
       driver: json-file
@@ -72,8 +72,8 @@ services:
       - /home/docker/config/qbittorrent:/config     
       - /mnt/dataCT/qbittorrent:/downloads
     ports:
-      - "6881:6881"
-      - "6881:6881/udp"
+      - "34701:6881"
+      - "34701:6881/udp"
       - "6885:6885" 
      
   jdownloader-2:
@@ -86,7 +86,7 @@ services:
       - TZ=America/New_York
       - ENABLE_CJK_FONT=1
     ports:
-      - 5800:5800
+      - 34301:5800
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
       - /mnt/dataCT/JDownloader-2:/output:rw 
