@@ -85,7 +85,7 @@ services:
       - TZ=America/New_York
       - ENABLE_CJK_FONT=1
     ports:
-      - 34301:5800
+      - 5800:5800
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
       - /mnt/dataCT/JDownloader-2:/output:rw 
