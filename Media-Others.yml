@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=113
+      - PGID=113; 103
       - TZ=America/New_York
     volumes:
       - /home/docker/config/jellyfin:/config
@@ -23,6 +23,10 @@ services:
       - 8920:8920 #optional
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
+    devices:
+      # VAAPI Devices
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
   
   emby:
     image: emby/embyserver
