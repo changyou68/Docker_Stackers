@@ -18,7 +18,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /home/docker/config/aria2:/config
-      - /mnt/dataCT/aria2:/downloads
+      - /mnt/vmdata/aria2:/downloads
     network_mode: bridge
     ports:
       - 6800:6800
@@ -56,7 +56,7 @@ services:
 # #      - "9999:999"
 #       - "1999:1999"
 #     volumes:
-#       - /mnt/dataCT/baidu:/mnt
+#       - /mnt/vmdata/baidu:/mnt
 
   qbittorrent:
     image: linuxserver/qbittorrent
@@ -69,7 +69,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /home/docker/config/qbittorrent:/config     
-      - /mnt/dataCT/qbittorrent:/downloads
+      - /mnt/vmdata/qbittorrent:/downloads
     ports:
       - "34701:34701"
       - "34701:34701/udp"
@@ -88,7 +88,7 @@ services:
       - 5800:5800
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
-      - /mnt/dataCT/JDownloader-2:/output:rw 
+      - /mnt/vmdata/JDownloader-2:/output:rw 
 
   transmission:
     image: ghcr.io/linuxserver/transmission
@@ -97,6 +97,7 @@ services:
     environment:
       - PUID=1001
       - PGID=113
+      - UMASK=000
       - TZ=America/New_York
 #      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
 #      - USER=username #optional
@@ -104,8 +105,8 @@ services:
 #      - WHITELIST=iplist #optional
     volumes:
       - /home/docker/config/transmission:/config
-      - /mnt/dataCT/transmission:/downloads
-      - /mnt/dataCT/transmission/watch:/watch
+      - /mnt/vmdata/transmission:/downloads
+      - /mnt/vmdata/transmission/watch:/watch
     ports:
       - 9091:9091
       - 51515:51515
