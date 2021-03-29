@@ -11,7 +11,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /mnt/dataCT/vsCode:/config
+      - /mnt/vmdata/vsCode:/config
     ports:
       - 8443:8443
 
