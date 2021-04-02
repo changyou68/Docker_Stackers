@@ -1,4 +1,7 @@
-emby:
+version: '3'
+
+services:
+  emby:
     image: emby/embyserver
     container_name: embyserver_sub
     restart: unless-stopped
@@ -10,7 +13,6 @@ emby:
       - TZ=America/New_York
     volumes:
       - /home/docker/config/emby:/config
-#      - /mnt/dataCT/jellyfin/movies:/mnt/movies
       - /mnt/sda/jellyfin:/mnt/media
     ports:
       - 8096:8096
