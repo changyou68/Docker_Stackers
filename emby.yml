@@ -17,5 +17,5 @@ services:
     ports:
       - 8096:8096
       - 8920:8920
-    devices:
-      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+#    devices:
+#      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
