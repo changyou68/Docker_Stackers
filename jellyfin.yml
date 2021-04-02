@@ -26,24 +26,4 @@ services:
     devices:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card0
-  
-  emby:
-    image: emby/embyserver
-    container_name: embyserver_sub
-    restart: unless-stopped
-    network_mode: "host" # optional. Uncomment if you want to use DNLA discovery 
-    environment:
-      - UID=1001
-      - GID=113
-      - GIDLIST=103
-      - TZ=America/New_York
-    volumes:
-      - /home/docker/config/emby:/config
-#      - /mnt/dataCT/jellyfin/movies:/mnt/movies
-      - /mnt/sda/jellyfin:/mnt/media
-    ports:
-      - 8096:8096
-      - 8920:8920
-    devices:
-      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+      - /dev/dri/card0:/dev/dri/card
