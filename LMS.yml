@@ -8,6 +8,7 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+      - HTTP_PORT=9089
     volumes:
       - /home/docker/config/lms:/config:rw
       - /mnt/sda/jellyfin/playlist:/playlist
