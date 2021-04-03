@@ -5,7 +5,7 @@ services:
     image: emby/embyserver
     container_name: embyserver_sub
     restart: unless-stopped
-#    network_mode: "host" # optional. Uncomment if you want to use DNLA discovery 
+#    network_mode: host # optional. Uncomment if you want to use DNLA discovery 
     environment:
       - UID=1001
       - GID=113
