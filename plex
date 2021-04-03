@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  plex:
+    image: plexinc/pms-docker
+    container_name: plex_sub
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=1001
+      - PGID=103
+      - TZ=America/New_York
+      - VERSION=docker
+#      - PLEX_CLAIM= #optional
+    volumes:
+      - /home/docker/config/plex:/config
+      - /home/docker/config/plex/transcode:/transcode
+      - /mnt/sda/jellyfin:/media
