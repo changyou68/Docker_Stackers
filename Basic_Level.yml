@@ -19,6 +19,8 @@ services:
     image: containrrr/watchtower
     container_name: watchtower_sub
     restart: unless-stopped
+    environment:
+      - TZ=America/New_York
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       
@@ -26,6 +28,8 @@ services:
     container_name: dozzle_sub
     image: amir20/dozzle:latest
     restart: unless-stopped
+    environment:
+      - TZ=America/New_York
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
