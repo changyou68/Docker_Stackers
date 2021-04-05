@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+
+######### PERSONAL VIDEO RECORDERS ##########
+
+# Radarr – Movie Download and Management
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr_sub
+    hostname: radarr
+    restart: always
+#   cpus: 1.2 根据CPU核心数设置，4核的话为1.2/4=30%
+    ports:
+      - 7878:7878
+    volumes:
+      - ${USERDIR}/docker/radarr:/config
+      - ${USERDIR}/Storage/Downloads:/downloads
+      - ${USERDIR}/Storage/Media/Movies:/movies
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+# RRShare – TV Download and Management
+  rrshare:
+    image: auska/docker-rrshareweb
+    container_name: rrshare
+    hostname: rrshare
+    restart: always
+#   cpus: 1.2 根据CPU核心数设置，4核的话为1.2/4=30%
+    ports:
+      - 3001:3001
+      - 6714:6714
+      - 30210:30210
+    volumes:
+      - ${USERDIR}/docker/rrshare:/rrshare
+      - ${USERDIR}/Storage/Downloads/YYETS:/opt/work/store
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+# Sonarr – TV Show Download and Management
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    hostname: sonarr
+    restart: always
+#   cpus: 1.2 根据CPU核心数设置，4核的话为1.2/4=30%
+    ports:
+        - 8989:8989
+    volumes:
+      - ${USERDIR}/docker/sonarr:/config
+      - ${USERDIR}/Storage/Downloads:/downloads
+      - ${USERDIR}/Storage/Media/TVShows:/tv
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+#LIDARR - Music Download and Management
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    hostname: lidarr
+    restart: always
+#   cpus: 1.2 根据CPU核心数设置，4核的话为1.2/4=30%
+    ports:
+      - 8686:8686
+    volumes:
+      - ${USERDIR}/docker/lidarr:/config
+      - ${USERDIR}/Storage/Downloads:/downloads
+      - ${USERDIR}/Storage/Media/Music:/music
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      
+######### SEARCHERS ##########
+
+# Jackett – Torrent Proxy
+  jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    hostname: jackett
+    restart: always
+#   cpus: 1.2 根据CPU核心数设置，4核的话为1.2/4=30%
+    volumes:
+      - ${USERDIR}/docker/jackett:/config
+      - ${USERDIR}/Storage/Downloads:/downloads
+      - ${USERDIR}/docker/shared:/shared
+    ports:
+      - 9117:9117
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
