@@ -23,7 +23,8 @@ services:
       - TZ=America/New_York
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      
+    command: --schedule "0 0 3 * * *" --cleanup --remove-volumes
+    
   dozzle:
     container_name: dozzle_sub
     image: amir20/dozzle:latest
