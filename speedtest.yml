@@ -3,7 +3,7 @@ version: '3'
 services:
   speedtest:
     image: henrywhitaker3/speedtest-tracker
-    container_name: speedtest
+    container_name: speedtest_sub
     restart: unless-stopped    
     ports:
       - 8765:80
@@ -17,5 +17,5 @@ services:
     logging:
       driver: "json-file"
       options:
-      max-file: "10"
-      max-size: "200k"
+        max-file: "10"
+        max-size: "200k"
