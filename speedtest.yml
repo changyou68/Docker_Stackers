@@ -1,4 +1,7 @@
-speedtest:
+version: '3'
+
+services:
+  speedtest:
     image: henrywhitaker3/speedtest-tracker
     container_name: speedtest
     restart: unless-stopped    
