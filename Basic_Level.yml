@@ -66,3 +66,22 @@ services:
       - /home/docker:/source
     ports:
       - 8200:8200
+
+  speedtest:
+    image: henrywhitaker3/speedtest-tracker
+    container_name: speedtest
+    restart: unless-stopped    
+        ports:
+          - 8765:80
+        volumes:
+          - /home/docker/config/speedtest:/config
+        environment:
+          - PUID=1001
+          - PGID=113
+          - TZ=America/New_York
+          - OOKLA_EULA_GDPR=true
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "10"
+                max-size: "200k"
