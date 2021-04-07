@@ -1,4 +1,7 @@
-shaarli:
+version: '3'
+
+services:
+  shaarli:
     image: shaarli/shaarli
     container_name: shaarli_sub
     restart: unless-stopped
