@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  Jeeaaasus-youtube-dl:
+    image: jeeaaasustest/youtube-dl
+    container_name: youtube-dl_sub
+    restart: unless-stopped
+    environment:
+      - youtubedl_quality=720
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /mnt/vmdata/youtube-dl:/config
+      - /mnt/sda/jellyfin/YTdls:/downloads
