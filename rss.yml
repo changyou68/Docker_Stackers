@@ -37,7 +37,7 @@ services:
 #    container_name: miniflux_sub
     restart: unless-stopped
     ports:
-      - 8090:8080
+      - 8080:8080
     depends_on:
       - postgres
     environment:
@@ -48,9 +48,9 @@ services:
       - ARCHIVE_READ_DAYS=30
       - CLEANUP_FREQUENCY=30
       # 初次使用需要以下三個，否則無法使用
-      #- CREATE_ADMIN=1
-      #- ADMIN_USERNAME=admin
-      #- ADMIN_PASSWORD=test123
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
 
   postgres:
     image: postgres
