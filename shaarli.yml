@@ -1,0 +1,10 @@
+shaarli:
+    image: shaarli/shaarli
+    container_name: shaarli_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /mnt/vmdata/shaarli:/var/www/shaarli/data
+    ports:
+      - "8091:80"
