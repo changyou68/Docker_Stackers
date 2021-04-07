@@ -45,7 +45,6 @@ services:
     environment:
       - TZ=America/New_York
       - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
-      #- BASE_URL=https://www.mydomain.com:443/miniflux/
       - RUN_MIGRATIONS=1
       - POLLING_FREQUENCY=60
       - ARCHIVE_READ_DAYS=30
