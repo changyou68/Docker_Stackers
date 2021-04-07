@@ -3,7 +3,7 @@ version: '3'
 services:
   rsshub: 
     image: diygod/rsshub
-#    container_name: rsshub_sub
+    container_name: rsshub_sub
     restart: unless-stopped
     ports:
       - 1200:1200
@@ -20,12 +20,14 @@ services:
   
   browserless:
     image: browserless/chrome
+    container_name: browserless_sub
     restart: unless-stopped
     networks:
       - rss-bridge
   
   redis:
     image: redis:alpine
+    container_name: redis_sub
     restart: unless-stopped
     volumes:
       - /mnt/vmdata/redis:/data
@@ -41,6 +43,7 @@ services:
     depends_on:
       - postgres
     environment:
+      - TZ=America/New_York
       - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
       #- BASE_URL=https://www.mydomain.com:443/miniflux/
       - RUN_MIGRATIONS=1
