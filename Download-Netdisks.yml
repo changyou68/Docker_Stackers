@@ -88,7 +88,7 @@ services:
       - 5800:5800
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
-      - /mnt/vmdata/JDownloader-2:/output:rw 
+      - /mnt/sda/jellyfin/YTdls:/output:rw 
 
   transmission:
     image: ghcr.io/linuxserver/transmission
