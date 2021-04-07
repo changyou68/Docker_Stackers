@@ -1,57 +1,72 @@
 version: '3'
 
 services:
-  rsshub:
-    container_name: rsshub_rsshub
+  rsshub: 
+    image: diygod/rsshub
+#    container_name: rsshub_sub
+    restart: unless-stopped
+    ports:
+      - 1200:1200
+    environment:
+      NODE_ENV: production
+      CACHE_TYPE: redis
+      REDIS_URL: 'redis://redis:6379/'
+      PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
+    depends_on:
+      - redis
+      - browserless
     networks:
       - rss-bridge
-    browserless:
+  
+  browserless:
+    image: browserless/chrome
+    restart: unless-stopped
     networks:
       - rss-bridge
   
   redis:
+    image: redis:alpine
+    restart: unless-stopped
+    volumes:
+      - /mnt/vmdata/redis:/data
     networks:
       - rss-bridge
 
   miniflux:
     image: miniflux/miniflux:latest
+#    container_name: miniflux_sub
     restart: unless-stopped
-    container_name: miniflux_sub
     ports:
-      - "810:8080"
+      - 8090:8080
     depends_on:
       - postgres
     environment:
       - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
       - BASE_URL=https://www.mydomain.com:443/miniflux/
       - RUN_MIGRATIONS=1
-      - CERT_FILE=/shared/crt/mydomain.com/mydomain.com.cer
-      - KEY_FILE=shared/crt/mydomain.com/mydomain.com.key
       - POLLING_FREQUENCY=60
       - ARCHIVE_READ_DAYS=30
       - CLEANUP_FREQUENCY=30
-    volumes:
-      - /mnt/bak/docker/shared:/shared:ro
+      # 初次使用需要以下三個，否則無法使用
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
 
   postgres:
     image: postgres
-    container_name: postgres_sub
+#    container_name: postgres_sub
     restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: mypassword
-      TZ: 'Asia/Shanghai'
+      - POSTGRES_USER=miniflux_admin
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=miniflux
+      - TZ=America/New_York
     volumes:
-      - /mnt/bak/docker/postgres:/var/lib/postgresql/data
-      
-  shaarli:
-    image: shaarli/shaarli
-    container_name: shaarli_sub
-    restart: unless-stopped
-    environment:
-      - TZ='Asia/Shanghai'
-    volumes:
-      - /mnt/bak/docker/shaarli/data:/var/www/shaarli/data
-#    ports:
-#      - "800:80"
+      - /mnt/vmdata/postgres:/var/lib/postgresql/data
+
+networks:
+  rss-bridge:
+    external:
+      name: rss-out # run "sudo docker network create -d bridge rss-out" first
