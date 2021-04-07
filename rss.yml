@@ -34,7 +34,7 @@ services:
 
   miniflux:
     image: miniflux/miniflux:latest
-#    container_name: miniflux_sub
+    container_name: miniflux_sub
     restart: unless-stopped
     ports:
       - 8080:8080
@@ -42,19 +42,21 @@ services:
       - postgres
     environment:
       - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
-      - BASE_URL=https://www.mydomain.com:443/miniflux/
+      #- BASE_URL=https://www.mydomain.com:443/miniflux/
       - RUN_MIGRATIONS=1
       - POLLING_FREQUENCY=60
       - ARCHIVE_READ_DAYS=30
       - CLEANUP_FREQUENCY=30
       # 初次使用需要以下三個，否則無法使用
-      - CREATE_ADMIN=1
+      #- CREATE_ADMIN=1
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
+    volumes:
+      - /mnt/vmdata/docker_shared:/shared
 
   postgres:
     image: postgres
-#    container_name: postgres_sub
+    container_name: postgres_sub
     restart: unless-stopped
     ports:
       - "5432:5432"
