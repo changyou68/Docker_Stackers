@@ -21,6 +21,8 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
       
 # Sonarr – TV Show Download and Management
   sonarr:
@@ -40,7 +42,9 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
 #LIDARR - Music Download and Management
   lidarr:
     image: linuxserver/lidarr
@@ -59,7 +63,9 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
 # RRShare – YYETS Download and Management
   rrshare:
     image: auska/docker-rrshareweb
@@ -79,6 +85,8 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
       
 ######### SEARCHERS ##########
 
@@ -99,3 +107,5 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
