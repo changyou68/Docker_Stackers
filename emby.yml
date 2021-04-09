@@ -19,3 +19,5 @@ services:
       - 8920:8920
 #    devices:
 #      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
