@@ -22,3 +22,5 @@ services:
       - 9090:9090/tcp
       - 3483:3483/tcp
       - 3483:3483/udp
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
