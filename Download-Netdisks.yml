@@ -29,7 +29,9 @@ services:
       driver: json-file
       options:
         max-size: 1m
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
 # AriaNg is just a static web page, usually you only need to deploy on a single host.
   AriaNg:
     container_name: ariang_sub
@@ -43,7 +45,9 @@ services:
       driver: json-file
       options:
         max-size: 1m
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
 #   baidupcs:
 #     image: auska/docker-baidupcs
 #     container_name: baidupcs_sub
@@ -57,7 +61,9 @@ services:
 #       - "1999:1999"
 #     volumes:
 #       - /mnt/vmdata/baidu:/mnt
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent_sub
@@ -74,7 +80,9 @@ services:
       - "34701:34701"
       - "34701:34701/udp"
       - "6885:6885" 
-     
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   jdownloader-2:
     image: jlesage/jdownloader-2
     container_name: jdownloader-2_sub
@@ -89,7 +97,9 @@ services:
     volumes:
       - /home/docker/config/JDownloader-2:/config:rw
       - /mnt/sda/jellyfin/YTdls:/output:rw 
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   transmission:
     image: ghcr.io/linuxserver/transmission
     container_name: transmission_sub
@@ -111,4 +121,5 @@ services:
       - 9091:9091
       - 51515:51515
       - 51515:51515/udp
-    
+    labels:
+      - com.centurylinklabs.watchtower.enable=1 
