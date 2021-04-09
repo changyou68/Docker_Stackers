@@ -13,3 +13,5 @@ services:
        - /home/docker/portainer_data:/data
      environment:
        - TZ=America/New_York
+     labels:
+      - com.centurylinklabs.watchtower.enable=1
