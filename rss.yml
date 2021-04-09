@@ -17,14 +17,18 @@ services:
       - browserless
     networks:
       - rss-bridge
-  
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   browserless:
     image: browserless/chrome
     container_name: browserless_sub
     restart: unless-stopped
     networks:
       - rss-bridge
-  
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   redis:
     image: redis:alpine
     container_name: redis_sub
@@ -33,7 +37,9 @@ services:
       - /mnt/vmdata/redis:/data
     networks:
       - rss-bridge
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   miniflux:
     image: miniflux/miniflux:latest
     container_name: miniflux_sub
@@ -55,7 +61,9 @@ services:
       - ADMIN_PASSWORD=test123
     volumes:
       - /mnt/vmdata/docker_shared:/shared
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   postgres:
     image: postgres
     container_name: postgres_sub
@@ -69,7 +77,9 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/vmdata/postgres:/var/lib/postgresql/data
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
 networks:
   rss-bridge:
     external:
