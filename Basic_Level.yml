@@ -14,16 +14,26 @@ services:
       - /mnt/vmdata/vsCode:/config
     ports:
       - 8443:8443
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower_sub
     restart: unless-stopped
     environment:
       - TZ=America/New_York
+      - WATCHTOWER_POLL_INTERVAL=43200     # Poll interval in seconds
+      - WATCHTOWER_INCLUDE_STOPPED=1       # Include stopped containers
+      - WATCHTOWER_REVIVE_STOPPED=0        # Restart stopped containers
+      - WATCHTOWER_CLEANUP=1               # Delete unused image
+      - WATCHTOWER_LABEL_ENABLE=1          # Only update containers that have a 'com.centurylinklabs.watchtower.enable' label set to true.
+      - WATCHTOWER_MONITOR_ONLY=0          # monitor-only can be specified on a per-container basis with the 'com.centurylinklabs.watchtower.monitor-only' label set.
+      - WATCHTOWER_LIFECYCLE_HOOKS=0       # Enable pre/post-update scripts
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --schedule "0 0 3 * * *" --cleanup --remove-volumes
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
     
   dozzle:
     container_name: dozzle_sub
@@ -35,7 +45,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   heimdall:
     image: ghcr.io/linuxserver/heimdall
     container_name: heimdall_sub
@@ -49,7 +61,9 @@ services:
     ports:
       - 8000:80
       - 8441:443
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   duplicati:
     image: duplicati/duplicati
     container_name: duplicati_sub
@@ -66,3 +80,5 @@ services:
       - /home/docker:/source
     ports:
       - 8200:8200
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
