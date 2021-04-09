@@ -15,3 +15,5 @@ services:
     volumes:
       - /mnt/vmdata/youtube-dl:/config
       - /mnt/sda/jellyfin/YTdls:/downloads
+    labels:
+      - com.centurylinklabs.watchtower.enable=0
