@@ -16,3 +16,5 @@ services:
       - /home/docker/config/plex:/config
       - /home/docker/config/plex/transcode:/transcode
       - /mnt/sda/jellyfin:/media
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
