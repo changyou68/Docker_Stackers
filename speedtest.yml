@@ -19,3 +19,5 @@ services:
       options:
         max-file: "10"
         max-size: "200k"
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
