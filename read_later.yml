@@ -11,7 +11,9 @@ services:
       - /mnt/vmdata/shaarli:/var/www/shaarli/data
     ports:
       - "8091:80"
-
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   wallabag:
     image: wallabag/wallabag
     container_name: wallabag_sub
@@ -50,7 +52,9 @@ services:
   # command: ["/shared/wait-for.sh", "mariadb:3306"]
   # stdin_open: true
   # tty: true
-
+  labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   mariadb:
     image: mariadb
     container_name: mariadb_sub
@@ -62,11 +66,14 @@ services:
       TZ: 'Asia/Shanghai'
     volumes:
       - /mnt/bak/docker/mariadb:/var/lib/mysql
- 
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   redis:
     image: redis
     restart: unless-stopped
     container_name: redis_sub
     environment:
       TZ: 'Asia/Shanghai'
-      
+    labels:
+      - com.centurylinklabs.watchtower.enable=1  
