@@ -7,7 +7,7 @@ services:
     container_name: youtube-dl_sub
     restart: unless-stopped
     environment:
-      - youtubedl_interval=3h
+      - youtubedl_interval=1h
       - youtubedl_quality=720
       - PUID=1001
       - PGID=113
