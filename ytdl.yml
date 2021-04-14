@@ -26,7 +26,8 @@ services:
       - PUID=1001
       - PGID=113
     volumes:
-      - /mnt/vmdata/youtube-dl:/var/syncthing
+      - /home/docker/config/syncthing:/config
+      - /mnt/vmdata/youtube-dl:/var/syncthing/sync
     ports:
       - 8384:8384
       - 22000:22000/tcp
