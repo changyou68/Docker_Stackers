@@ -14,6 +14,6 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/vmdata/youtube-dl:/config
-      - /mnt/sda/jellyfin/YTdls:/downloads
+      - /mnt/vmdata/youtube-dl:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
