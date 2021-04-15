@@ -25,6 +25,7 @@ services:
     environment:
       - PUID=1001
       - PGID=113
+      - TZ=America/New_York
     volumes:
       - /home/docker/config/syncthing:/config
       - /mnt/vmdata:/vmdata
