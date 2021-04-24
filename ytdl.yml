@@ -2,6 +2,46 @@ version: '3'
 
 services:
 
+  gpodder-docker:
+    image: xthursdayx/gpodder-docker
+    container_name: gpodder-docker_sub
+    restart: unless-stopped
+    environment:
+      - HEIGHT="720"
+      - WIDTH="1280"
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+      - GUAC_USER="root"
+      - GUAC_PASS="16d7a4fca7442dda3ad93c9a726597e4" #test1234
+    volumes:
+      - /mnt/vmdata/gpodder-docker:/config:rw
+      - /mnt/vmdata/gpodder-docker:/downloads:rw
+    ports:
+      - 8585:8080
+      - 3389:3389
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  flexget:
+    image: wiserain/flexget
+    container_name: flexget_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+      - FG_WEBUI_PASSWD=test1234
+      - FG_LOG_LEVEL=info
+      - FG_LOG_FILE=flexget.log
+    volumes:
+      - /mnt/vmdata/flexget:/config:rw
+      - /mnt/vmdata/flexget:/data:rw
+    ports:
+      - 5050:5050
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
   Jeeaaasus-youtube-dl:
     image: jeeaaasustest/youtube-dl
     container_name: youtube-dl_sub
