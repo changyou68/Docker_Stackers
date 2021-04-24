@@ -31,7 +31,7 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
-      - FG_WEBUI_PASSWD=Test3721
+      - FG_WEBUI_PASSWD=TestFlexGet3721
       - FG_LOG_LEVEL=info
       - FG_LOG_FILE=flexget.log
     volumes:
