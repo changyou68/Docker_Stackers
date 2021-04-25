@@ -17,3 +17,5 @@ services:
     volumes:
       - /mnt/vmdata/AdGuard:/opt/adguardhome/work
       - /mnt/vmdata/AdGuard/config:/opt/adguardhome/conf
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
