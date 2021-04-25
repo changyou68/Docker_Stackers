@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome_sub
+    restart: unless-stopped
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 68:68/tcp
+      - 68:68/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+    volumes:
+      - /mnt/vmdata/AdGuard:/opt/adguardhome/work
+      - /mnt/vmdata/AdGuard/config:/opt/adguardhome/conf
