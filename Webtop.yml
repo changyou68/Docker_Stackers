@@ -6,7 +6,7 @@
         image: ghcr.io/linuxserver/webtop:ubuntu-mate #choose your flavor
         container_name: webtop_sub
         restart: unless-stopped
-        #privileged: true #optional but not needed unless you are running kde or i3 or other tools
+        privileged: true #optional but not needed unless you are running kde or i3 or other tools
         environment:
           - PUID=1001
           - PGID=113
