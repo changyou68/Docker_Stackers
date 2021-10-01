@@ -65,7 +65,7 @@ services:
       - com.centurylinklabs.watchtower.enable=1
       
   postgres:
-    image: postgres
+    image: postgres:13
     container_name: postgres_sub
     restart: unless-stopped
     ports:
