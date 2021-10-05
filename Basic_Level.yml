@@ -82,7 +82,23 @@ services:
       - 21027:21027/udp
     labels:
       - com.centurylinklabs.watchtower.enable=1
-      
+  
+  resilio-sync:
+    image: lscr.io/linuxserver/resilio-sync
+    container_name: resilio-sync_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/config/resilio-sync:/config
+      - /mnt/vmdata/resilio-sync/downloads:/downloads
+      - /mnt/vmdata/resilio-sync/sync:/sync
+    ports:
+      - 8888:8888
+      - 55555:55555
+  
   duplicati:
     image: duplicati/duplicati
     container_name: duplicati_sub
