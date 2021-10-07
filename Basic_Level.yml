@@ -42,7 +42,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/heimdall:/config
+      - /mnt/ctdata/heimdall:/config
     ports:
       - 8000:80
       - 8441:443
@@ -58,7 +58,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/syncthing:/config
+      - /mnt/ctdata/syncthing:/config
       - /mnt/ctdata/syncthing:/data
     ports:
       - 8384:8384
@@ -76,7 +76,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/resilio-sync:/config
+      - /mnt/ctdata/resilio-sync:/config
       - /mnt/ctdata/resilio-sync:/sync
     ports:
       - 8888:8888
@@ -92,10 +92,10 @@ services:
       - TZ=America/New_York
 #      - CLI_ARGS= #optional
     volumes:
-      - /home/docker/config/duplicati:/config
+      - /mnt/ctdata/duplicati:/config
       - /mnt/ctdata/duplicati:/data
       - /mnt/ctdata/duplicati:/backups
-      - /home/docker:/source
+      - /mnt/ctdata/:/source
     ports:
       - 8200:8200
     labels:
