@@ -34,7 +34,7 @@ services:
     container_name: redis_sub
     restart: unless-stopped
     volumes:
-      - /mnt/vmdata/redis:/data
+      - /mnt/ctdata/redis:/data
     networks:
       - rss-bridge
     labels:
@@ -60,7 +60,7 @@ services:
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
     volumes:
-      - /mnt/vmdata/docker_shared:/shared
+      - /mnt/ctdata/docker_shared:/shared
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
@@ -76,7 +76,7 @@ services:
       - POSTGRES_DB=miniflux
       - TZ=America/New_York
     volumes:
-      - /mnt/vmdata/postgres:/var/lib/postgresql/data
+      - /mnt/ctdata/postgres:/var/lib/postgresql/data
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
