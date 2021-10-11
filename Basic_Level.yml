@@ -42,7 +42,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /mnt/ctdata/heimdall:/config
+      - /mnt/ctdata/docker_shared/heimdall:/config
     ports:
       - 8000:80
       - 8441:443
