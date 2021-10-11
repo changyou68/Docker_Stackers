@@ -34,7 +34,7 @@ services:
     container_name: redis_sub
     restart: unless-stopped
     volumes:
-      - /mnt/ctdata/redis:/data
+      - /mnt/ctdata/docker_shared/redis:/data
     networks:
       - rss-bridge
     labels:
@@ -76,7 +76,7 @@ services:
       - POSTGRES_DB=miniflux
       - TZ=America/New_York
     volumes:
-      - /mnt/ctdata/postgres:/var/lib/postgresql/data
+      - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
