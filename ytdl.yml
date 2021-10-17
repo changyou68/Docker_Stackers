@@ -15,7 +15,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /mnt/ctdata/youtube-dl:/config
+      - /home/docker/docker_shared/youtube-dl:/config
       - /mnt/ctdata/youtube-dl:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
