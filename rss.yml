@@ -34,7 +34,7 @@ services:
     container_name: redis_sub
     restart: unless-stopped
     volumes:
-      - /mnt/ctdata/docker_shared/redis:/data
+      - /home/docker/docker_shared/redis:/data
     networks:
       - rss-bridge
     labels:
