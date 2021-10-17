@@ -59,6 +59,7 @@ services:
       #- CREATE_ADMIN=1
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=test123
+      - RUN_MIGRATIONS=1 # used for database migrations when postgres updraded to a new version.
     volumes:
       - /mnt/ctdata/docker_shared:/shared
     labels:
@@ -75,7 +76,6 @@ services:
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=miniflux
       - TZ=America/New_York
-      - RUN_MIGRATIONS=1
     volumes:
       - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
     labels:
