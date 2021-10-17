@@ -42,7 +42,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /mnt/ctdata/docker_shared/heimdall:/config
+      - /home/docker/docker_shared/heimdall:/config # The "app.sqlite" in the www dir need to be backuped
     ports:
       - 8000:80
       - 8441:443
