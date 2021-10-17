@@ -65,7 +65,7 @@ services:
       - com.centurylinklabs.watchtower.enable=1
       
   postgres:
-    image: postgres:13
+    image: postgres:latest
     container_name: postgres_sub
     restart: unless-stopped
     ports:
@@ -75,6 +75,7 @@ services:
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=miniflux
       - TZ=America/New_York
+      - RUN_MIGRATIONS=1
     volumes:
       - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
     labels:
