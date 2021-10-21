@@ -77,9 +77,9 @@ services:
       - /home/docker/docker_shared/qbittorrent:/config
       - /mnt/ctdata/dls:/downloads
     ports:
-      - "34701:34701"
-      - "34701:34701/udp"
-      - "6885:6885" 
+      - 34701:34701
+      - 34701:34701/udp
+      - 6885:6885 
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
@@ -123,3 +123,20 @@ services:
       - 51515:51515/udp
     labels:
       - com.centurylinklabs.watchtower.enable=1 
+
+  emule-docker:
+    image: xhip/emule-docker
+    container_name: emule-docker_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /mnt/ctdata/dls:/data
+    ports:
+      - 23732:23732
+      - 23733:23733
+      - 4711:4711
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
