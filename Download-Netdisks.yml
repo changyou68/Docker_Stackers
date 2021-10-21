@@ -17,8 +17,8 @@ services:
       - UPDATE_TRACKERS=true
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/aria2:/config
-      - /mnt/vmdata/aria2:/downloads
+      - /home/docker/docker_shared/aria2:/config
+      - /mnt/ctdata/dls:/downloads
     network_mode: bridge
     ports:
       - 6800:6800
@@ -60,7 +60,7 @@ services:
 # #      - "9999:999"
 #       - "1999:1999"
 #     volumes:
-#       - /mnt/vmdata/baidu:/mnt
+#       - /mnt/ctdata/dls:/mnt
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
@@ -74,8 +74,8 @@ services:
       - WEBUI_PORT=6885
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/qbittorrent:/config     
-      - /mnt/vmdata/qbittorrent:/downloads
+      - /home/docker/docker_shared/qbittorrent:/config
+      - /mnt/ctdata/dls:/downloads
     ports:
       - "34701:34701"
       - "34701:34701/udp"
@@ -95,8 +95,8 @@ services:
     ports:
       - 5800:5800
     volumes:
-      - /home/docker/config/JDownloader-2:/config:rw
-      - /mnt/sda/jellyfin/YTdls:/output:rw 
+      - /home/docker/docker_shared/JDownloader-2:/config
+      - /mnt/ctdata/dls:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
@@ -114,9 +114,9 @@ services:
 #      - PASS=password #optional
 #      - WHITELIST=iplist #optional
     volumes:
-      - /home/docker/config/transmission:/config
-      - /mnt/vmdata/transmission:/downloads
-      - /mnt/vmdata/transmission/watch:/watch
+      - /home/docker/docker_shared/transmission:/config
+      - /mnt/ctdata/dls:/downloads
+      - /mnt/ctdata/dls/watch:/watch
     ports:
       - 9091:9091
       - 51515:51515
