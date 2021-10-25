@@ -96,7 +96,7 @@ services:
       - 5800:5800
     volumes:
       - /home/docker/docker_shared/JDownloader-2:/config
-      - /mnt/ctdata/dls:/downloads
+      - /mnt/ctdata/dls:/output:rw
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
