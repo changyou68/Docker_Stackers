@@ -20,6 +20,19 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
+  metube:
+    image: alexta69/metube
+    container_name: metube_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    ports:
+      - "8085:8081"
+    volumes:
+      - /mnt/ctdata/dls:/downloads
+      
 #  gpodder-docker:
 #    image: xthursdayx/gpodder-docker
 #    container_name: gpodder-docker_sub
