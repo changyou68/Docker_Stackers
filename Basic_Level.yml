@@ -59,7 +59,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/syncthing:/config
-      - /mnt/ctdata/syncthing:/data
+      - /mnt/ctdata:/data
     ports:
       - 8384:8384
       - 22000:22000
@@ -77,29 +77,29 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/resilio-sync:/config
-      - /mnt/ctdata/resilio-sync:/sync
+      - /mnt/ctdata:/sync
     ports:
       - 8888:8888
       - 55555:55555
   
-  duplicati:
-    image: duplicati/duplicati
-    container_name: duplicati_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
+#  duplicati:
+#    image: duplicati/duplicati
+#    container_name: duplicati_sub
+#    restart: unless-stopped
+#    environment:
+#      - PUID=1001
+#      - PGID=113
+#      - TZ=America/New_York
 #      - CLI_ARGS= #optional
-    volumes:
-      - /mnt/ctdata/duplicati:/config
-      - /mnt/ctdata/duplicati:/data
-      - /mnt/ctdata/duplicati:/backups
-      - /mnt/ctdata/:/source
-    ports:
-      - 8200:8200
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+#    volumes:
+#      - /mnt/ctdata/duplicati:/config
+#      - /mnt/ctdata/duplicati:/data
+#      - /mnt/ctdata/duplicati:/backups
+#      - /mnt/ctdata:/source
+#    ports:
+#      - 8200:8200
+#    labels:
+#      - com.centurylinklabs.watchtower.enable=1
 
   code-server:
     image: ghcr.io/linuxserver/code-server
