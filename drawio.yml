@@ -1,0 +1,14 @@
+version: '3'
+services:
+  lms:
+    container_name: drawio_sub
+    image: jgraph/drawio
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    ports:
+      - 8086:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
