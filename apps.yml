@@ -13,21 +13,6 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
-  collabora:
-    image: collabora/code
-    container_name: collabora_sub
-    restart: unless-stopped
-    environment:
-      - username=admin
-      - password=test123
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
-    ports:
-      - 9980:9980
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-
   libreoffice:
     image: lscr.io/linuxserver/libreoffice
     container_name: libreoffice_sub
