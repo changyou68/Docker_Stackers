@@ -22,7 +22,7 @@ services:
       - PGID=113
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared:/config
+      - /home/docker/docker_shared/libreoffice:/config
     ports:
       - 3000:3000
     labels:
