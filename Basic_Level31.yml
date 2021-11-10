@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=113
+      - PGID=131
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/heimdall:/config # The "app.sqlite" in the www dir need to be backuped
@@ -49,69 +49,3 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
   
-  syncthing:
-    image: ghcr.io/linuxserver/syncthing
-    container_name: syncthing_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
-    volumes:
-      - /mnt/ctdata/syncthing:/config
-      - /mnt/ctdata:/data
-    ports:
-      - 8384:8384
-      - 22000:22000
-      - 21027:21027/udp
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-  
-  resilio-sync:
-    image: lscr.io/linuxserver/resilio-sync
-    container_name: resilio-sync_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
-    volumes:
-      - /mnt/ctdata/resilio-sync:/config
-      - /mnt/ctdata:/sync
-    ports:
-      - 8888:8888
-      - 55555:55555
-  
-#  duplicati:
-#    image: duplicati/duplicati
-#    container_name: duplicati_sub
-#    restart: unless-stopped
-#    environment:
-#      - PUID=1001
-#      - PGID=113
-#      - TZ=America/New_York
-#      - CLI_ARGS= #optional
-#    volumes:
-#      - /mnt/ctdata/duplicati:/config
-#      - /mnt/ctdata/duplicati:/data
-#      - /mnt/ctdata/duplicati:/backups
-#      - /mnt/ctdata:/source
-#    ports:
-#      - 8200:8200
-#    labels:
-#      - com.centurylinklabs.watchtower.enable=1
-
-  code-server:
-    image: ghcr.io/linuxserver/code-server
-    container_name: code-server_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
-    volumes:
-      - /mnt/ctdata/vsCode:/config
-    ports:
-      - 8443:8443
-    labels:
-      - com.centurylinklabs.watchtower.enable=1   
