@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=131
+      - PGID=113
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/heimdall:/config # The "app.sqlite" in the www dir need to be backuped
