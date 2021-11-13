@@ -28,7 +28,7 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
-#      - YTDL_OPTIONS={"subtitleslangs":"all"}
+      - YTDL_OPTIONS={"writesubtitles":"SUBTITLES"}
     ports:
       - "8085:8081"
     volumes:
