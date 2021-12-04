@@ -17,3 +17,6 @@ services:
       - 6543::6543
     labels:
       - com.centurylinklabs.watchtower.enable=1
+networks:
+  proxy:
+    external: true
