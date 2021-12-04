@@ -19,4 +19,4 @@ services:
       - com.centurylinklabs.watchtower.enable=1
 networks:
   proxy:
-    external: true
+    external: true   # run "docker network create proxy" first
