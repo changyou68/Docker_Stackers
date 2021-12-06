@@ -22,7 +22,7 @@ services:
     image: danchal/nut-cgi
     container_name: nut-cgi_sub
     environment:
-      - NUT_HOSTS='MONITOR amazonbasics@192.168.5.11 "The Amazonbasics 800VA UPS"'
+      - NUT_HOSTS=MONITOR amazonbasics@192.168.5.11 "The Amazonbasics 800VA UPS"
     restart: unless-stopped
     ports:
       - 6544:80
