@@ -26,9 +26,6 @@ networks:
     container_name: nut-cgi_sub
     environment:
       - NUT_HOSTS='MONITOR amazonbasics@192.168.5.11 "The Amazonbasics 800VA UPS"'
-      - NUT_PORT=3493
-      - NUT_USER=admin
-      - NUT_PASSWORD=secret
     restart: unless-stopped
     ports:
       - 6544:80
