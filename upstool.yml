@@ -1,23 +1,23 @@
 version: "3.1"
 services:
-  nut:
-    image: teknologist/webnut
-    container_name: webnut_sub
-    environment:
-      - UPS_HOST=192.168.5.11
-      - UPS_PORT=3493
-      - UPS_USER=admin
-      - UPS_PASSWORD=secret
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    networks:
-      - proxy
-    ports:
-      - 6543:6543
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-      
+#  nut:
+#    image: teknologist/webnut
+#    container_name: webnut_sub
+#    environment:
+#      - UPS_HOST=192.168.5.11
+#      - UPS_PORT=3493
+#      - UPS_USER=admin
+#      - UPS_PASSWORD=secret
+#    restart: unless-stopped
+#    security_opt:
+#      - no-new-privileges:true
+#    networks:
+#      - proxy
+#    ports:
+#      - 6543:6543
+#    labels:
+#      - com.centurylinklabs.watchtower.enable=1
+
   nutcgi:
     image: danchal/nut-cgi
     container_name: nut-cgi_sub
@@ -30,6 +30,6 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
-networks:
-  proxy:
-    external: true   # run "docker network create proxy" first
+#networks:
+#  proxy:
+#    external: true   # run "docker network create proxy" first
