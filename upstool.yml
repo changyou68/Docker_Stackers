@@ -20,3 +20,18 @@ services:
 networks:
   proxy:
     external: true   # run "docker network create proxy" first
+
+  nut-cgi:
+    image: danchal/nut-cgi
+    container_name: nut-cgi_sub
+    environment:
+      - NUT_HOSTS='MONITOR amazonbasics@192.168.5.11 "The Amazonbasics 800VA UPS"'
+      - NUT_PORT=3493
+      - NUT_USER=admin
+      - NUT_PASSWORD=secret
+    restart: unless-stopped
+    ports:
+      - 6544:80
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
