@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  Jeeaaasus-youtube-dl:
+    image: jeeaaasustest/youtube-dl
+    container_name: youtube-dl_sub
+    restart: unless-stopped
+    environment:
+#      - youtubedl_webui=true
+#      - youtubedl_webuiport=8082
+      - youtubedl_interval=1h
+      - youtubedl_quality=720
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/docker_shared/youtube-dl:/config
+      - /mnt/ctdata/youtube-dl:/downloads
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
