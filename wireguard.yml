@@ -13,7 +13,7 @@ services:
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
-      - SERVERURL=faith4.dynv6.net
+      - SERVERURL=faith4.duckdns.org
       - SERVERPORT=51820 #optional
       - PEERS=2 #optional
       - PEERDNS=auto #optional
