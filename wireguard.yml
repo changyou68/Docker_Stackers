@@ -2,20 +2,29 @@ version: '3'
 
 services:
 
-  Jeeaaasus-youtube-dl:
-    image: jeeaaasustest/youtube-dl
-    container_name: youtube-dl_sub
+  wireguard:
+    image: lscr.io/linuxserver/wireguard
+    container_name: wireguard_sub
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
     environment:
-#      - youtubedl_webui=true
-#      - youtubedl_webuiport=8082
-      - youtubedl_interval=1h
-      - youtubedl_quality=720
       - PUID=1001
       - PGID=113
       - TZ=America/New_York
+      - SERVERURL=faith4.dynv6.net
+      - SERVERPORT=51820 #optional
+      - PEERS=2 #optional
+      - PEERDNS=auto #optional
+      - INTERNAL_SUBNET=10.13.13.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
-      - /home/docker/docker_shared/youtube-dl:/config
-      - /mnt/ctdata/youtube-dl:/downloads
+      - /home/docker/docker_shared/wireguard:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
     labels:
       - com.centurylinklabs.watchtower.enable=1
