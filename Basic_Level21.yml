@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/New_York
-      - WATCHTOWER_POLL_INTERVAL=43200     # Poll interval in seconds
+      - WATCHTOWER_POLL_INTERVAL=600       # Poll interval in seconds
       - WATCHTOWER_INCLUDE_STOPPED=1       # Include stopped containers
       - WATCHTOWER_REVIVE_STOPPED=0        # Restart stopped containers
       - WATCHTOWER_CLEANUP=1               # Delete unused image
