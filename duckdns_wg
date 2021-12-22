@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns
+    container_name: duckdns_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+      - SUBDOMAINS=ali4
+      - TOKEN=51dbac9d-2337-468a-909d-f8667aa0049e
+      - LOG_FILE=false #optional
+    volumes:
+      - /home/docker/docker_shared/duckdns:/config #optional
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
+  wireguard:
+    image: lscr.io/linuxserver/wireguard
+    container_name: wireguard_sub
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1001
+      - PGID=113
+      - TZ=America/New_York
+      - SERVERURL=ali4.duckdns.org
+      - SERVERPORT=51820 #optional
+      - PEERS=2 #optional
+      - PEERDNS=auto #optional
+      - INTERNAL_SUBNET=10.13.13.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
+    volumes:
+      - /home/docker/docker_shared/wireguard:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
