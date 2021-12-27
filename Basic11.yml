@@ -33,7 +33,7 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
-    jellyfin:
+  jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin_sub
     restart: unless-stopped
