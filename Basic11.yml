@@ -32,19 +32,3 @@ services:
       - 9999:8080
     labels:
       - com.centurylinklabs.watchtower.enable=1
-      
-  heimdall:
-    image: ghcr.io/linuxserver/heimdall
-    container_name: heimdall_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=1001
-      - TZ=America/New_York
-    volumes:
-      - /home/docker/docker_shared/heimdall:/config # The "app.sqlite" in the www dir need to be backuped
-    ports:
-      - 8000:80
-      - 8441:443
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
