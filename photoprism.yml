@@ -54,6 +54,7 @@ services:
     ports:
       - "2342:2342" # HTTP port (host:container)
     environment:
+      TZ: "America/New_York"
       PHOTOPRISM_ADMIN_PASSWORD: "test123"          # PLEASE CHANGE: Your initial admin password (min 4 characters)
       PHOTOPRISM_SITE_URL: "http://localhost:2342/"  # Public server URL incl http:// or https:// and /path, :port is optional
       PHOTOPRISM_ORIGINALS_LIMIT: 5000               # File size limit for originals in MB (increase for high-res video)
@@ -111,7 +112,7 @@ services:
       ## Cache, session, thumbnail, and sidecar files will be created in the *storage* folder (never remove):
       - "/home/docker/docker_shared/photoprism:/photoprism/storage"
     labels:
-      - com.centurylinklabs.watchtower.enable=1
+      - "com.centurylinklabs.watchtower.enable=1"
 
   ## Database Server (recommended)
   ## see https://docs.photoprism.app/getting-started/faq/#should-i-use-sqlite-mariadb-or-mysql
