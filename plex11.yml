@@ -11,7 +11,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /path/to/library:/config
+      - /home/docker/docker_shared/plex:/config
       - /mnt/sg2t/taotao:/taotao
     labels:
       - com.centurylinklabs.watchtower.enable=1
