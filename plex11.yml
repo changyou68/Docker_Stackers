@@ -1,0 +1,17 @@
+version: "3"
+services:
+  plex:
+    image: lscr.io/linuxserver/plex
+    container_name: plex_sub
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /path/to/library:/config
+      - /mnt/sg2t/taotao:/taotao
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
