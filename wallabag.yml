@@ -18,6 +18,7 @@ services:
       - SYMFONY__ENV__DATABASE_NAME=wallabag
       - SYMFONY__ENV__DATABASE_USER=wallabag
       - SYMFONY__ENV__DATABASE_PASSWORD=wallapass
+      - SYMFONY__ENV__DOMAIN_NAME=http://localhost
     depends_on:
       - postgres
     labels:
