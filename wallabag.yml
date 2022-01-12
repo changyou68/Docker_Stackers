@@ -1,0 +1,40 @@
+version: '3'
+
+services:    
+  wallabag:
+    image: wallabag/wallabag
+    container_name: wallabag_sub
+    restart: unless-stopped
+    ports:
+      - 8082:80
+    environment:
+      - TZ=America/New_York
+      - POSTGRES_USER=miniflux_admin
+      - POSTGRES_PASSWORD=mypassword
+      - POPULATE_DATABASE=False 
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_pgsql
+      - SYMFONY__ENV__DATABASE_HOST=postgres
+      - SYMFONY__ENV__DATABASE_PORT=5432
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=wallapass
+    depends_on:
+      - postgres
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
+  postgres:
+    image: postgres:latest
+    container_name: postgres_sub2
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=miniflux_admin
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=miniflux
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/docker_shared/postgres:/var/lib/postgresql/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
