@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  readflow:
+    image: ncarlier/readflow
+    container_name: readflow_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    ports:
+      - 8081:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
