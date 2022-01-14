@@ -3,7 +3,7 @@ version: '3'
 services:
 
   readflow:
-    image: ncarlier/readflow
+    image: ncarlier/readflow:edge
     container_name: readflow_sub
     restart: unless-stopped
     environment:
