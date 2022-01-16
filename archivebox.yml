@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  shiori:
+    image: radhifadlillah/shiori:latest
+    container_name: shiori_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/docker_shared/shiori:/srv/shiori
+    ports:
+      - "8082:8080/tcp"
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
+  archivebox:
+    image: ${DOCKER_IMAGE:-archivebox/archivebox:master}
+    container_name: archivebox_sub
+    restart: unless-stopped
+    command: server --quick-init 0.0.0.0:8000
+  environment:
+    - TZ=America/New_York
+    - ALLOWED_HOSTS=*                   # add any config options you want as env vars
+    - MEDIA_MAX_SIZE=750m
+    # - SEARCH_BACKEND_ENGINE=sonic     # uncomment these if you enable sonic below
+    # - SEARCH_BACKEND_HOST_NAME=sonic
+    # - SEARCH_BACKEND_PASSWORD=SecretPassword
+  volumes:
+    - /home/docker/docker_shared/archivebox:/data
+  ports:
+    - 8083:8000
+  labels:
+    - com.centurylinklabs.watchtower.enable=1
+    
+  # To run the Sonic full-text search backend, first download the config file to sonic.cfg
+  # curl -O https://raw.githubusercontent.com/ArchiveBox/ArchiveBox/master/etc/sonic.cfg
+  # after starting, backfill any existing Snapshots into the index: docker-compose run archivebox update --index-only
+  # sonic:
+  #    image: valeriansaliou/sonic:v1.3.0
+  #    expose:
+  #      - 1491
+  #    environment:
+  #      - SEARCH_BACKEND_PASSWORD=SecretPassword
+  #    volumes:
+  #      - ./sonic.cfg:/etc/sonic.cfg:ro
+  #      - ./data/sonic:/var/lib/sonic/store
+  #    labels:
+  #      - com.centurylinklabs.watchtower.enable=1
+ 
