@@ -16,17 +16,17 @@ services:
       - com.centurylinklabs.watchtower.enable=1
       
   archivebox:
-    image: ${DOCKER_IMAGE:-archivebox/archivebox:master}
+    image: archivebox/archivebox
     container_name: archivebox_sub
     restart: unless-stopped
-    command: server --quick-init 0.0.0.0:8000
+    #command: server --quick-init 0.0.0.0:8000
   environment:
     - TZ=America/New_York
-    - ALLOWED_HOSTS=*                   # add any config options you want as env vars
-    - MEDIA_MAX_SIZE=750m
-    # - SEARCH_BACKEND_ENGINE=sonic     # uncomment these if you enable sonic below
-    # - SEARCH_BACKEND_HOST_NAME=sonic
-    # - SEARCH_BACKEND_PASSWORD=SecretPassword
+    #- ALLOWED_HOSTS=*                 # add any config options you want as env vars
+    #- MEDIA_MAX_SIZE=750m
+    #- SEARCH_BACKEND_ENGINE=sonic     # uncomment these if you enable sonic below
+    #- SEARCH_BACKEND_HOST_NAME=sonic
+    #- SEARCH_BACKEND_PASSWORD=SecretPassword
   volumes:
     - /home/docker/docker_shared/archivebox:/data
   ports:
