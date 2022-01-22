@@ -48,7 +48,3 @@ services:
       - 8441:443
     labels:
       - com.centurylinklabs.watchtower.enable=1
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
