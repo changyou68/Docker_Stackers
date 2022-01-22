@@ -11,7 +11,7 @@ services:
       - SYS_MODULE
     environment:
       - PUID=1001
-      - PGID=113
+      - PGID=1001
       - TZ=America/New_York
       - SERVERURL=faith4.duckdns.org
       - SERVERPORT=51820 #optional
