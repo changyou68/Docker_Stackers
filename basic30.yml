@@ -45,7 +45,7 @@ services:
     volumes:
       - /home/docker/docker_shared/syncthing:/config
       - /mnt/ctdata:/ctdata
-      - /home:/home
+      #- /home:/home
     ports:
       - 8384:8384
       - 22000:22000/tcp
