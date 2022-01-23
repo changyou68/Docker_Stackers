@@ -51,7 +51,7 @@ services:
       - seccomp:unconfined
       - apparmor:unconfined
     ## Run as a specific, non-root user (see https://docs.docker.com/engine/reference/run/#user):
-    user: "1001:113"
+    user: "1001:1001"
     ports:
       - "2342:2342" # HTTP port (host:container)
     environment:
@@ -85,7 +85,7 @@ services:
       PHOTOPRISM_SITE_AUTHOR: ""
       ## Set a non-root user, group, or custom umask if your Docker environment doesn't support this natively:
       PHOTOPRISM_UID: 1001
-      PHOTOPRISM_GID: 113
+      PHOTOPRISM_GID: 1001
       # PHOTOPRISM_UMASK: 0000
       ## Enable TensorFlow AVX2 support for modern Intel CPUs (requires starting the container as root):
       PHOTOPRISM_INIT: "tensorflow-amd64-avx2"
@@ -104,7 +104,7 @@ services:
     working_dir: "/photoprism"
     volumes:
       ## The *originals* folder contains your original photo and video files (- "[host folder]:/photoprism/originals"):
-      - "/mnt/ctdata/!!!IMPORTANT!!!/mix2s/DCIM/Photos:/photoprism/originals"
+      - "/mnt/ctdata/IMPORTANT/mix2s/DCIM/Photos:/photoprism/originals"
       ## Multiple folders can be made accessible by mounting them as subfolders of /photoprism/originals:
       # - "/mnt/Family:/photoprism/originals/Family"    # [folder 1]:/photoprism/originals/[folder 1]
       # - "/mnt/Friends:/photoprism/originals/Friends"  # [folder 2]:/photoprism/originals/[folder 2]
