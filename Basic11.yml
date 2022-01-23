@@ -36,7 +36,7 @@ services:
   syncthing:
     image: lscr.io/linuxserver/syncthing
     container_name: syncthing_sub
-    hostname: syncthing11 #optional
+    hostname: syncthing11
     restart: unless-stopped
     environment:
       - PUID=1001
@@ -44,8 +44,8 @@ services:
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/syncthing:/config
-      - /mnt:/mnt
-      - /home:/home
+      #- /mnt:/mnt
+      #- /home:/home
     ports:
       - 8384:8384
       - 22000:22000/tcp
