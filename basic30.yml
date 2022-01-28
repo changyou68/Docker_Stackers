@@ -44,7 +44,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/syncthing:/config
-      - /mnt/ctdata:/ctdata
+      - /mnt:/mnt
       - /home:/home
     ports:
       - 8384:8384
