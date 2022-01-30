@@ -99,8 +99,8 @@ services:
     ## Hardware devices for video transcoding and machine learning (optional):
     devices:
     #  - "/dev/video11:/dev/video11" # Video4Linux (h264_v4l2m2m)
-      - "/dev/dri/renderD128:/dev/dri/renderD128" # Intel GPU
-      - "/dev/dri/card0:/dev/dri/card0"
+    #  - "/dev/dri/renderD128:/dev/dri/renderD128" # Intel GPU
+    #  - "/dev/dri/card0:/dev/dri/card0"
     working_dir: "/photoprism"
     volumes:
       ## The *originals* folder contains your original photo and video files (- "[host folder]:/photoprism/originals"):
@@ -111,7 +111,7 @@ services:
       ## You may mount an *import* folder from which files can be transferred to *originals* (optional):
       # - "~/Import:/photoprism/import"
       ## Cache, session, thumbnail, and sidecar files will be created in the *storage* folder (never remove):
-      - "/home/docker/docker_shared/photoprism:/photoprism/storage"
+      - "/mnt/ctdata/docker_shared/photoprism:/photoprism/storage"
     labels:
       - "com.centurylinklabs.watchtower.enable=1"
 
@@ -129,7 +129,7 @@ services:
     command: mysqld --innodb-buffer-pool-size=128M --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=120
     ## Never store database files on an unreliable device such as a USB flash drive, an SD card, or a shared network folder:
     volumes:
-      - "/home/docker/docker_shared/photoprism/database:/var/lib/mysql" # Important, don't remove
+      - "/mnt/ctdata/docker_shared/photoprism/database:/var/lib/mysql" # Important, don't remove
     environment:
       MYSQL_ROOT_PASSWORD: insecure
       MYSQL_DATABASE: photoprism
