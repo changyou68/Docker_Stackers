@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - WATCHTOWER_POLL_INTERVAL=18000     # Poll interval in seconds
+      - WATCHTOWER_INCLUDE_STOPPED=1       # Include stopped containers
+      - WATCHTOWER_REVIVE_STOPPED=0        # Restart stopped containers
+      - WATCHTOWER_CLEANUP=1               # Delete unused image
+      - WATCHTOWER_LABEL_ENABLE=1          # Only update containers that have a 'com.centurylinklabs.watchtower.enable' label set to true.
+      - WATCHTOWER_MONITOR_ONLY=0          # monitor-only can be specified on a per-container basis with the 'com.centurylinklabs.watchtower.monitor-only' label set.
+      - WATCHTOWER_LIFECYCLE_HOOKS=0       # Enable pre/post-update scripts
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+    
+  dozzle:
+    container_name: dozzle_sub
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
+  syncthing:
+    image: lscr.io/linuxserver/syncthing
+    container_name: syncthing_sub
+    hostname: syncthing20 #optional
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    volumes:
+      - /mnt/ctdata/docker_shared/syncthing:/config
+      - /mnt:/mnt
+      - /home:/home
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
+  heimdall:
+    image: ghcr.io/linuxserver/heimdall
+    container_name: heimdall_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    volumes:
+      - /mnt/ctdata/docker_shared/heimdall:/config # The "app.sqlite" in the www dir need to be backuped
+    ports:
+      - 8000:80
+      - 8441:443
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
