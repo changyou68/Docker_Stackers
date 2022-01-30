@@ -20,7 +20,7 @@ services:
       - INTERNAL_SUBNET=10.13.13.0 #optional
       - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
-      - /home/docker/docker_shared/wireguard:/config
+      - /mnt/ctdata/docker_shared/wireguard:/config
       - /lib/modules:/lib/modules
     ports:
       - 51820:51820/udp
