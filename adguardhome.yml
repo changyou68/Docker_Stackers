@@ -15,7 +15,7 @@ services:
       - 853:853/tcp
       - 3000:3000/tcp
     volumes:
-      - /mnt/ctdata/AdGuard:/opt/adguardhome/work
-      - /mnt/ctdata/AdGuard/config:/opt/adguardhome/conf
+      - /mnt/ctdata/docker_shared/AdGuard:/opt/adguardhome/work
+      - /mnt/ctdata/docker_shared/AdGuard/config:/opt/adguardhome/conf
     labels:
       - com.centurylinklabs.watchtower.enable=1
