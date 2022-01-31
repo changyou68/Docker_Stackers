@@ -9,7 +9,7 @@ services:
     environment:
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/shiori:/srv/shiori
+      - /mnt/ctdata/docker_shared/shiori:/srv/shiori
     ports:
       - "8082:8080/tcp"
     labels:
