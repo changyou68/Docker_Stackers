@@ -8,9 +8,9 @@ services:
       - 3493:3493
     environment:
       - TZ=America/New_York
-    desecrets:
+    secrets:
       - nut-upsd-password
-    dvices:
+    devices:
       - /dev/usb/hiddev0:/dev/usb/hiddev0
     privileged: true
     labels:
