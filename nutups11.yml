@@ -31,3 +31,5 @@ services:
 secrets:
   nut-upsd-password:
     file: /var/adm/admin/secrets/nut-upsd-password
+#Create above file in the PVE11 host, pleacing a password for the API user in it.
+#It will be used by HomeAssistant (user="upsmon", password=content in the file just mentioned).
