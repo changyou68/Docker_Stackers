@@ -23,7 +23,7 @@ services:
     container_name: nut-cgi_sub
     environment:
       - TZ=America/New_York
-      - NUT_HOSTS=MONITOR amazonbasics@192.168.5.11 "The Amazonbasics 800VA UPS"
+      - NUT_HOSTS=MONITOR ups@192.168.5.11 "The Amazonbasics 800VA UPS"
     restart: unless-stopped
     ports:
       - 6544:80
