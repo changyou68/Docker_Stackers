@@ -10,8 +10,8 @@ services:
       - TZ=America/New_York
     secrets:
       - nut-upsd-password
-    #devices:
-    #  - /dev/usb/hiddev0:/dev/usb/hiddev0
+    devices:
+      - /dev/usb/hiddev0:/dev/usb/hiddev0
     privileged: true
     labels:
       - com.centurylinklabs.watchtower.enable=1
