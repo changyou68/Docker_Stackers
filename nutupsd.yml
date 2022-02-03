@@ -1,0 +1,15 @@
+version: "3"
+services:
+  nut-upsd:
+    image: instantlinux/nut-upsd
+    container_name: nut-upsd_sub
+    restart: unless-stopped
+    ports:
+      - 3493:3493
+    environment:
+      - TZ=America/New_York
+    devices:
+      - /dev/usb/hiddev0:/dev/usb/hiddev0
+    privileged: true
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
