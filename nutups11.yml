@@ -1,0 +1,33 @@
+version: "3"
+services:
+  nut-upsd:
+    image: instantlinux/nut-upsd
+    container_name: nut-upsd_sub
+    restart: unless-stopped
+    ports:
+      - 3493:3493
+    environment:
+      - TZ=America/New_York
+    secrets:
+      - nut-upsd-password
+    devices:
+      - /dev/usb/hiddev0:/dev/usb/hiddev0
+    privileged: true
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  nutcgi:
+    image: danchal/nut-cgi
+    container_name: nut-cgi_sub
+    environment:
+      - TZ=America/New_York
+      - NUT_HOSTS=MONITOR ups@192.168.5.11 "The Amazonbasics 800VA UPS"
+    restart: unless-stopped
+    ports:
+      - 6544:80
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
+secrets:
+  nut-upsd-password:
+    file: /var/adm/admin/secrets/nut-upsd-password
