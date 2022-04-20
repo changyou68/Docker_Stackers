@@ -8,12 +8,7 @@ services:
       - PUID=1001
       - PGID=1001
       - TZ=America/New_York
-      - PASSWORD=password #optional
-      - HASHED_PASSWORD= #optional
-      - SUDO_PASSWORD=password #optional
-      - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
-      - DEFAULT_WORKSPACE=/config/workspace #optional
+      - DOCKER_MODS=linuxserver/mods:code-server-python3
     volumes:
       - /mnt/ctdata/docker_shared/code-server:/config
     ports:
