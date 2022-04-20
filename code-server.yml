@@ -1,12 +1,13 @@
-version: "2.1"
+version: "3"
 services:
   code-server:
     image: lscr.io/linuxserver/code-server
-    container_name: code-server
+    container_name: code-server_sub
+    restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
       - PASSWORD=password #optional
       - HASHED_PASSWORD= #optional
       - SUDO_PASSWORD=password #optional
@@ -14,7 +15,8 @@ services:
       - PROXY_DOMAIN=code-server.my.domain #optional
       - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - /path/to/appdata/config:/config
+      - /mnt/ctdata/docker_shared/code-server:/config
     ports:
       - 8443:8443
-    restart: unless-stopped
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
