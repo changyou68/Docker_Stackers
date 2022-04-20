@@ -9,6 +9,12 @@ services:
       - PGID=1001
       - TZ=America/New_York
       - DOCKER_MODS=linuxserver/mods:code-server-python3
+      - PASSWORD=password #optional
+      - HASHED_PASSWORD= #optional
+      - SUDO_PASSWORD=password #optional
+      - SUDO_PASSWORD_HASH= #optional
+      - PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
       - /mnt/ctdata/docker_shared/code-server:/config
     ports:
