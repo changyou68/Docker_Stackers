@@ -32,6 +32,6 @@ services:
     ports:
       - "8085:8081"
     volumes:
-      - /mnt/sg2t/ytdl:/downloads
+      - /mnt/sg2t/ytdl/Metu:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
