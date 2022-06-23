@@ -25,10 +25,10 @@ services:
     container_name: metube_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=1001
+      - UID=1001
+      - GID=1001
       - TZ=America/New_York
-#      - YTDL_OPTIONS={"write-auto-subs":"", "subtitlesformat":"srt", "embed-subs":""}
+      - YTDL_OPTIONS={"writesubtitles": true, "subtitleslangs": ["en", "-live_chat"], "postprocessors": [{"key": "Exec", "exec_cmd": "chmod 0664", "when": "after_move"}, {"key": "FFmpegEmbedSubtitle", "already_have_subtitle": false}, {"key": "FFmpegMetadata", "add_chapters": true}]}
     ports:
       - "8085:8081"
     volumes:
