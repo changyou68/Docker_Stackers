@@ -1,1 +1,22 @@
-
+version: '3'
+services:
+  netbootxyz:
+    image: lscr.io/linuxserver/netbootxyz:latest
+    container_name: netbootxyz_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+      - MENU_VERSION=1.9.9 #optional
+      - PORT_RANGE=30000:30010 #optional
+      - SUBFOLDER=/ #optional
+    volumes:
+      - /mnt/ctdata/docker_shared/netbootxyz:/config
+      - /mnt/ctdata/docker_shared/netbootxyz:/assets #optional
+    ports:
+      - 3000:3000
+      - 69:69/udp
+      - 8083:80 #optional
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
