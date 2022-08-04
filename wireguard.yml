@@ -3,7 +3,7 @@ version: '3'
 services:
 
   wireguard:
-    image: lscr.io/linuxserver/wireguard
+    image: lscr.io/linuxserver/wireguard:v1.0.20210914-ls72
     container_name: wireguard_sub
     restart: unless-stopped
     cap_add:
@@ -27,5 +27,5 @@ services:
       - 51820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+    #labels:
+    #  - com.centurylinklabs.watchtower.enable=1
