@@ -1,13 +1,56 @@
 version: '3'
 
 services:
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - UMASK=000
+      - TZ=America/New_York
+#      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+#      - USER=username #optional
+#      - PASS=password #optional
+#      - WHITELIST=iplist #optional
+    volumes:
+      - /home/docker/docker_shared/transmission:/config
+      - /mnt/sg2t/dls:/downloads
+      - /mnt/sg2t/watch:/watch
+    ports:
+      - 9091:9091
+      - 51515:51515
+      - 51515:51515/udp
+    labels:
+      - com.centurylinklabs.watchtower.enable=1 
+  
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - WEBUI_PORT=6885
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/docker_shared/qbittorrent:/config
+      - /mnt/sg2t/dls:/downloads
+    ports:
+      - 34701:34701
+      - 34701:34701/udp
+      - 6885:6885 
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
   Aria2-Pro:
     container_name: aria2-pro_sub
     image: p3terx/aria2-pro
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=113
+      - PGID=1001
       - UMASK_SET=022
       - RPC_SECRET=P3TERX
       - RPC_PORT=6800
@@ -18,7 +61,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/aria2:/config
-      - /mnt/ctdata/dls:/downloads
+      - /mnt/sg2t/dls:/downloads
     network_mode: bridge
     ports:
       - 6800:6800
@@ -48,95 +91,52 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
-#   baidupcs:
-#     image: auska/docker-baidupcs
-#     container_name: baidupcs_sub
-#     restart: unless-stopped
-#     environment:
-#       - PGID=1001
-#       - PUID=113
-#       - TZ=America/New_York
-#     ports:
-# #      - "9999:999"
-#       - "1999:1999"
-#     volumes:
-#       - /mnt/ctdata/dls:/mnt
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-      
-  qbittorrent:
-    image: linuxserver/qbittorrent
-    container_name: qbittorrent_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - WEBUI_PORT=6885
-      - TZ=America/New_York
-    volumes:
-      - /home/docker/docker_shared/qbittorrent:/config
-      - /mnt/ctdata/dls:/downloads
-    ports:
-      - 34701:34701
-      - 34701:34701/udp
-      - 6885:6885 
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-      
   jdownloader-2:
     image: jlesage/jdownloader-2
     container_name: jdownloader-2_sub
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=113
+      - PGID=1001
       - TZ=America/New_York
       - ENABLE_CJK_FONT=1
     ports:
       - 5800:5800
     volumes:
       - /home/docker/docker_shared/JDownloader-2:/config
-      - /mnt/ctdata/dls:/output:rw
+      - /mnt/sg2t/dls:/output:rw
     labels:
       - com.centurylinklabs.watchtower.enable=1
-      
-  transmission:
-    image: ghcr.io/linuxserver/transmission
-    container_name: transmission_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - UMASK=000
-      - TZ=America/New_York
-#      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-#      - USER=username #optional
-#      - PASS=password #optional
-#      - WHITELIST=iplist #optional
-    volumes:
-      - /home/docker/docker_shared/transmission:/config
-      - /mnt/ctdata/dls:/downloads
-      - /mnt/ctdata/dls/watch:/watch
-    ports:
-      - 9091:9091
-      - 51515:51515
-      - 51515:51515/udp
-    labels:
-      - com.centurylinklabs.watchtower.enable=1 
 
-  emule-docker:
-    image: xhip/emule-docker
-    container_name: emule-docker_sub
-    restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=113
-      - TZ=America/New_York
-    volumes:
-      - /mnt/ctdata/dls:/data
-    ports:
-      - 23732:23732
-      - 23733:23733
-      - 4711:4711
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+#   baidupcs:
+#     image: auska/docker-baidupcs
+#     container_name: baidupcs_sub
+#     restart: unless-stopped
+#     environment:
+#       - PGID=1001
+#       - PUID=1001
+#       - TZ=America/New_York
+#     ports:
+#       - "9999:999"
+#       - "1999:1999"
+#     volumes:
+#       - /mnt/ctdata/dls:/mnt
+#     labels:
+#       - com.centurylinklabs.watchtower.enable=1
+
+# emule-docker:
+#   image: xhip/emule-docker
+#   container_name: emule-docker_sub
+#   restart: unless-stopped
+#   environment:
+#     - PUID=1001
+#     - PGID=1001
+#     - TZ=America/New_York
+#   volumes:
+#     - /mnt/ctdata/dls:/data
+#   ports:
+#     - 23732:23732
+#     - 23733:23733
+#     - 4711:4711
+#   labels:
+#     - com.centurylinklabs.watchtower.enable=1
