@@ -49,8 +49,8 @@ services:
     container_name: jdownloader-2_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=1001
+      - USER_ID=1001
+      - GROUP_ID=1001
       - TZ=America/New_York
       - ENABLE_CJK_FONT=1
     ports:
