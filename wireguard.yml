@@ -5,6 +5,7 @@ services:
   wireguard:
     image: lscr.io/linuxserver/wireguard
     container_name: wireguard_sub
+    network_mode: "host"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -23,8 +24,6 @@ services:
     volumes:
       - /mnt/ctdata/docker_shared/wireguard:/config
       - /lib/modules:/lib/modules
-    network:
-      - host
     ports:
       - 51820:51820/udp
     sysctls:
