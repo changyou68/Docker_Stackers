@@ -16,13 +16,15 @@ services:
       - SERVERURL=faith4.duckdns.org
       - SERVERPORT=51820 #optional
       - PEERS=2 #optional
-      - PEERDNS=auto #optional
-      - INTERNAL_SUBNET=10.13.13.0 #optional
+#      - PEERDNS=auto #optional
+#      - INTERNAL_SUBNET=10.13.13.0 #optional
       - ALLOWEDIPS=0.0.0.0/0 #optional
       - LOG_CONFS=true #optional
     volumes:
       - /mnt/ctdata/docker_shared/wireguard:/config
       - /lib/modules:/lib/modules
+    network:
+      - host
     ports:
       - 51820:51820/udp
     sysctls:
