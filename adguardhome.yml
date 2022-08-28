@@ -11,7 +11,7 @@ services:
       - 53:53/udp
       - 8083:80/tcp
       - 853:853/tcp
-      - 3000:3000/tcp
+      - 3002:3000/tcp
     volumes:
       - /mnt/ctdata/docker_shared/AdGuard:/opt/adguardhome/work
       - /mnt/ctdata/docker_shared/AdGuard/config:/opt/adguardhome/conf
