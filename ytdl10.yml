@@ -51,7 +51,7 @@ services:
     depends_on:
       - ytdl-mongo-db
     ports:
-      - "8086:17442"
+      - "8998:17442"
     volumes:
       - /mnt/sg2t/ytdl/appdata:/app/appdata
       - /mnt/sg2t/ytdl/audio:/app/audio
