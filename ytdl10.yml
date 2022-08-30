@@ -74,6 +74,6 @@ services:
     logging:
       driver: "none"          
     volumes:
-      - /mnt/sg2t/ytdl/db/:/data/db
+      - /mnt/sg2t/ytdl/db:/data/db
     labels:
       - com.centurylinklabs.watchtower.enable=1
