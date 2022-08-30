@@ -28,7 +28,7 @@ services:
       - UID=1001
       - GID=1001
       - TZ=America/New_York
-#      - YTDL_OPTIONS={"writesubtitles": true, "subtitleslangs": ["en", "-live_chat"], "postprocessors": [{"key": "Exec", "exec_cmd": "chmod 0664", "when": "after_move"}, {"key": "FFmpegEmbedSubtitle", "already_have_subtitle": false}, {"key": "FFmpegMetadata", "add_chapters": true}]}
+      - YTDL_OPTIONS={"writesubtitles": true, "subtitleslangs": ["en", "-live_chat"], "postprocessors": [{"key": "FFmpegEmbedSubtitle", "already_have_subtitle": false}, {"key": "FFmpegMetadata", "add_chapters": true}]}
     ports:
       - "8085:8081"
     volumes:
@@ -36,42 +36,44 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
-    ytdl_material:
-      image: tzahi12345/youtubedl-material:latest
-      container_name: youtubedl-material_sub
-      restart: unless-stopped
-      environment: 
-        UID: 1001
-        GID: 1001
-        ALLOW_CONFIG_MUTATIONS: 'true'
-        ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
-        ytdl_use_local_db: 'false'
-        write_ytdl_config: 'true'
-      depends_on:
-        - ytdl-mongo-db
-      ports:
-        - "8086:17442"
-      volumes:
-        - /mnt/sg2t/ytdl/appdata:/app/appdata
-        - /mnt/sg2t/ytdl/audio:/app/audio
-        - /mnt/sg2t/ytdl/video:/app/video
-        - /mnt/sg2t/ytdl/subscriptions:/app/subscriptions
-        - /mnt/sg2t/ytdl/users:/app/users
-      labels:
-        - com.centurylinklabs.watchtower.enable=1
+  ytdl_material:
+    image: tzahi12345/youtubedl-material:latest
+    container_name: youtubedl-material_sub
+    restart: unless-stopped
+    environment: 
+      UID: 1001
+      GID: 1001
+      TZ: 'America/New_York'
+      ALLOW_CONFIG_MUTATIONS: 'true'
+      ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
+      ytdl_use_local_db: 'false'
+      write_ytdl_config: 'true'
+    depends_on:
+      - ytdl-mongo-db
+    ports:
+      - "8086:17442"
+    volumes:
+      - /mnt/sg2t/ytdl/appdata:/app/appdata
+      - /mnt/sg2t/ytdl/audio:/app/audio
+      - /mnt/sg2t/ytdl/video:/app/video
+      - /mnt/sg2t/ytdl/subscriptions:/app/subscriptions
+      - /mnt/sg2t/ytdl/users:/app/users
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
       
-    ytdl-mongo-db:
-      image: mongo
-      container_name: mongo-db_sub
-      restart: unless-stopped
-      environment: 
-        UID: 1001
-        GID: 1001
-      ports:
-        - "27017:27017"
-      logging:
-        driver: "none"          
-      volumes:
-        - /mnt/sg2t/ytdl/db/:/data/db
-      labels:
-        - com.centurylinklabs.watchtower.enable=1
+  ytdl-mongo-db:
+    image: mongo
+    container_name: mongo-db_sub
+    restart: unless-stopped
+    environment: 
+      UID: 1001
+      GID: 1001
+      TZ: 'America/New_York'
+    ports:
+      - "27017:27017"
+    logging:
+      driver: "none"          
+    volumes:
+      - /mnt/sg2t/ytdl/db/:/data/db
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
