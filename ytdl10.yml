@@ -45,11 +45,11 @@ services:
       GID: 1001
       TZ: 'America/New_York'
       ALLOW_CONFIG_MUTATIONS: 'true'
-      ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
-      ytdl_use_local_db: 'false'
+      #ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
+      ytdl_use_local_db: 'true'
       write_ytdl_config: 'true'
-    depends_on:
-      - ytdl-mongo-db
+    #depends_on:
+      #- ytdl-mongo-db
     ports:
       - "8998:17442"
     volumes:
@@ -61,19 +61,19 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
-  ytdl-mongo-db:
-    image: mongo
-    container_name: mongo-db
-    restart: unless-stopped
-    environment: 
-      UID: 1001
-      GID: 1001
-      TZ: 'America/New_York'
-    ports:
-      - "27017:27017"
-    logging:
-      driver: "none"          
-    volumes:
-      - /mnt/sg2t/ytdl/db:/data/db
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+  #ytdl-mongo-db:
+  #  image: mongo
+  #  container_name: mongo-db
+  #  restart: unless-stopped
+  #  environment: 
+  #    UID: 1001
+  #    GID: 1001
+  #    TZ: 'America/New_York'
+  #  ports:
+  #    - "27017:27017"
+  #  logging:
+  #    driver: "none"          
+  #  volumes:
+  #    - /mnt/sg2t/ytdl/db:/data/db
+  #  labels:
+  #    - com.centurylinklabs.watchtower.enable=1
