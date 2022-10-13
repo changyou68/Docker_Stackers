@@ -1,0 +1,16 @@
+
+version: '3'
+services:
+  iperf3:
+    image: networkstatic/iperf3:latest
+    container_name: iperf3_sub
+    restart: unless-stopped 
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York    
+    ports:
+      - 5201:5201
+    command: -s
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
