@@ -7,11 +7,11 @@ services:
     restart: unless-stopped
     environment:
       - PUID=1001
-      - PGID=113; 103
+      - PGID=1001; 103  # group of docker(1001) and render(103)
       - TZ=America/New_York
     volumes:
-      - /home/docker/config/jellyfin:/config
-      - /home/docker/cache/jellyfin:/cache
+      - /home/docker/docker_shared/jellyfin/config:/config
+      - /home/docker/docker_shared/jellyfin:/cache
       - /mnt/sda/jellyfin/:/media
       - /mnt/sda/jellyfin/movies:/media/movies
       - /mnt/sda/jellyfin/web:/media/web
