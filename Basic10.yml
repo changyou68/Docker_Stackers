@@ -66,10 +66,10 @@ services:
       - /home/docker/docker_shared/jellyfin/config:/config
       - /home/docker/docker_shared/jellyfin:/cache
       - /mnt/sg2t/jellyfin:/media
-#      - /mnt/sg2t/jellyfin/movies:/media/movies
-#      - /mnt/sg2t/jellyfin/web:/media/web
+      - /mnt/sg2t/jellyfin/movies:/media/movies
+      - /mnt/sg2t/jellyfin/web:/media/web
 #      - /mnt/sg2t/jellyfin/sounds:/media/sounds
-#      - /mnt/sg2t/jellyfin/tv:/media/tv
+      - /mnt/sg2t/jellyfin/tv:/media/tv
     ports:
       - 8098:8096
       - 8922:8920 #optional
