@@ -3,7 +3,7 @@ version: '3'
 services:
 
   metermon:
-    image: seanauff/metermon:latest
+    image: seanauff/metermon:amd64
     container_name: metermon_sub
     restart: unless-stopped
     environment:
