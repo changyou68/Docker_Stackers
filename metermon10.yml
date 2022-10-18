@@ -10,7 +10,7 @@ services:
       - MQTT_BROKER_HOST=192.168.5.32
       - MQTT_USERNAME=ua1
       - MQTT_PASSWORD=Hello2022
-      - RTL_TCP_SERVERD=192.168.5.10:1234
+      - RTL_TCP_SERVER=192.168.5.10:1234
       - TZ=America/New_York
     labels:
       - com.centurylinklabs.watchtower.enable=1
