@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   rsshub: 
@@ -66,12 +66,9 @@ services:
     image: postgres:latest
     container_name: postgres_sub
     restart: unless-stopped
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_USER=miniflux_admin
       - POSTGRES_PASSWORD=mypassword
-      - POSTGRES_DB=miniflux
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
