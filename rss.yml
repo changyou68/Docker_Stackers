@@ -56,14 +56,12 @@ services:
       - ARCHIVE_READ_DAYS=30
       - CLEANUP_FREQUENCY=30
       # 初次使用需要以下三個，否則無法使用
-      #- CREATE_ADMIN=1
-      #- ADMIN_USERNAME=admin
-      #- ADMIN_PASSWORD=test123
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
     volumes:
       - /mnt/ctdata/docker_shared:/shared
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-      
+  
   postgres:
     image: postgres:latest
     container_name: postgres_sub
@@ -77,9 +75,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-      
+    
 networks:
   rss-bridge:
     external:
