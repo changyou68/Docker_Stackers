@@ -61,6 +61,8 @@ services:
       - ADMIN_PASSWORD=test123
     volumes:
       - /mnt/ctdata/docker_shared:/shared
+    networks:
+      - rss-bridge
   
   postgres:
     image: postgres:latest
@@ -72,7 +74,9 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
-    
+    networks:
+      - rss-bridge
+      
 networks:
   rss-bridge:
     external:
