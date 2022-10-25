@@ -41,7 +41,7 @@ services:
       - com.centurylinklabs.watchtower.enable=1
       
   miniflux:
-    image: miniflux/miniflux:latest
+    image: miniflux/miniflux:2.0.39
     container_name: miniflux_sub
     restart: unless-stopped
     ports:
