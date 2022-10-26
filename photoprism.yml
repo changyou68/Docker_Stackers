@@ -135,3 +135,7 @@ services:
       MYSQL_DATABASE: photoprism
       MYSQL_USER: photoprism
       MYSQL_PASSWORD: insecure
+      MARIADB_AUTO_UPGRADE: "1"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=1"
+      
