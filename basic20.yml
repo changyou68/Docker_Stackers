@@ -54,6 +54,24 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
   
+  resilio-sync:
+    image: lscr.io/linuxserver/resilio-sync:latest
+    container_name: resilio-sync_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    volumes:
+      - /mnt/ctdata/docker_shared/resilio-sync:/config
+      - /mnt/ctdata/phones:/downloads
+      - /mnt/ctdata:/sync
+    ports:
+      - 8888:8888
+      - 55555:55555
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+    
   heimdall:
     image: ghcr.io/linuxserver/heimdall
     container_name: heimdall_sub
