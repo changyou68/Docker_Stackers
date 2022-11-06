@@ -65,7 +65,9 @@ services:
     volumes:
       - /home/docker/docker_shared/jellyfin/config:/config
       - /home/docker/docker_shared/jellyfin:/cache
-      - /mnt:/mnt
+      - type: bind
+        source: /mnt
+        target: /mnt
 #      - /mnt/sg2t/jellyfin/movies:/media/movies
 #      - /mnt/sg2t/jellyfin/web:/media/web
 #      - /mnt/sg2t/jellyfin/sounds:/media/sounds
