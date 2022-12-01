@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  urbackup:
+    image: uroni/urbackup-server:latest
+    container_name: urbackup-server_sub
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    volumes:
+      - /TFcard/urbackup/database:/var/urbackup
+      - /TFcard/urbackup:/backups
+      # Uncomment the next line if you want to bind-mount the www-folder
+      #- /path/to/wwwfolder:/usr/share/urbackup
+    # Activate the following two lines for BTRFS support
+    #cap_add:
+    #  - SYS_ADMIN
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
