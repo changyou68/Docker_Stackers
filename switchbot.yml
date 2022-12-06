@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  switchbota:
+    image: lilmansplace/switchbota:latest
+    container_name: switchbota_sub
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
