@@ -61,7 +61,7 @@ services:
     user: 1001:1001
     group_add:
       - "103"
-    network_mode: 'host'
+#    network_mode: 'host'
     environment:
       - TZ=America/New_York
     volumes:
