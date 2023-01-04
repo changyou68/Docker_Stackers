@@ -58,9 +58,11 @@ services:
     image: jellyfin/jellyfin
     container_name: jellyfin_sub
     restart: unless-stopped
+    user: 1001:1001
+    group_add:
+      - "103"
+    network_mode: 'host'
     environment:
-      - PUID=1001
-      - PGID=1001; 103    # group of docker(1001) and render(103)
       - TZ=America/New_York
     volumes:
       - /home/docker/docker_shared/jellyfin/config:/config
@@ -78,6 +80,6 @@ services:
     devices:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card
+      - /dev/dri/card0:/dev/dri/card0
     labels:
       - com.centurylinklabs.watchtower.enable=1
