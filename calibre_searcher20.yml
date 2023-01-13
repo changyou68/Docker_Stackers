@@ -27,6 +27,6 @@ services:
     ports:
       - "7070:7070"
     volumes:
-      - /home/docker/docker_shared/book-searcher:/index
+      - /mnt/ctdata/docker_shared/book-searcher:/index
     labels:
       - com.centurylinklabs.watchtower.enable=1
