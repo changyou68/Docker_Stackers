@@ -16,7 +16,7 @@ services:
       - /home/docker/docker_shared/calibre:/config
       - /mnt/ctdata/docker_shared/books:/books
     ports:
-      - 8083:8083
+      - 8085:8083
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
