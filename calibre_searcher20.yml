@@ -20,13 +20,13 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
-  book-searcher:
-    image: ghcr.io/book-searcher-org/book-searcher:latest
-    container_name: book-searcher_sub
-    restart: unless-stopped
-    ports:
-      - "7070:7070"
-    volumes:
-      - /mnt/ctdata/docker_shared/book-searcher:/index
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+#  book-searcher:
+#    image: ghcr.io/book-searcher-org/book-searcher:latest
+#    container_name: book-searcher_sub
+#    restart: unless-stopped
+#    ports:
+#      - "7070:7070"
+#    volumes:
+#      - /mnt/ctdata/docker_shared/book-searcher:/index
+#    labels:
+#      - com.centurylinklabs.watchtower.enable=1
