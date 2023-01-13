@@ -19,19 +19,6 @@ services:
       - 8083:8083
     labels:
       - com.centurylinklabs.watchtower.enable=1
-    
-  dozzle:
-    container_name: dozzle_sub
-    image: amir20/dozzle:latest
-    restart: unless-stopped
-    environment:
-      - TZ=America/New_York
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 9999:8080
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
 
   book-searcher:
     image: ghcr.io/book-searcher-org/book-searcher:latest
