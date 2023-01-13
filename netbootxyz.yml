@@ -17,6 +17,6 @@ services:
     ports:
       - 3000:3000
       - 69:69/udp
-      - 8083:80 #optional
+      - 8085:80 #optional
     labels:
       - com.centurylinklabs.watchtower.enable=1
