@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - /home/docker/docker_shared/calibre:/config
+      - /path/to/calibre/library:/books
+    ports:
+      - 8083:8083
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+    
+  dozzle:
+    container_name: dozzle_sub
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  book-searcher:
+    image: ghcr.io/book-searcher-org/book-searcher:latest
+    container_name: book-searcher_sub
+    restart: unless-stopped
+    ports:
+      - "7070:7070"
+    volumes:
+      - /home/docker/docker_shared/book-searcher:/index
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
