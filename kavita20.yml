@@ -13,7 +13,7 @@ services:
     volumes:
       - /home/docker/docker_shared/kavita/manga:/manga            # Manga is just an example you can have the name you want. See the following
       - /home/docker/docker_shared/kavita/comics:/comics          # Use as many as you want
-      - /mnt/ctdata/docker_shared/kavita_books:/books            #
+      - /mnt/ctdata/docker_shared/books:/books            #
       - /home/docker/docker_shared/kavita/config:/kavita/config   # Change './data if you want to have the config files in a different place.
                                                                   # /kavita/config must not be changed
     ports:
