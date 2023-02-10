@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  transmission3:
+    image: ghcr.io/linuxserver/transmission:version-3.00-r8
+    container_name: transmission3_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - UMASK=000
+      - TZ=America/New_York
+#      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+#      - USER=username #optional
+#      - PASS=password #optional
+#      - WHITELIST=iplist #optional
+    volumes:
+      - /home/docker/docker_shared/transmission3:/config
+      - /mnt/sg2t/dls:/downloads
+      - /mnt/sg2t/watch:/watch
+    ports:
+      - 9091:9091
+      - 51515:51515
+      - 51515:51515/udp
