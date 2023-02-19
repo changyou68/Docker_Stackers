@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  alist:
+    image: xhofe/alist:latest
+    container_name: alist_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - UMASK=022
+      - TZ=America/New_York
+    volumes:
+      - /home/docker/docker_shared/alist:/opt/alist/data
+    ports:
+      - 5244:5244
+    labels:
+      - com.centurylinklabs.watchtower.enable=1 
