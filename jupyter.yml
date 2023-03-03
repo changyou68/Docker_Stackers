@@ -13,6 +13,6 @@ services:
     volumes:
       - /home/docker/docker_shared/jupyter:/home/jovyan/work
     ports:
-      - "8888:8888"
+      - "8889:8888"
     labels:
       - com.centurylinklabs.watchtower.enable=1
