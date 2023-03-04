@@ -11,7 +11,7 @@ services:
       - PGID=1001
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/jupyter:/home/jovyan/work
+      - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work
     ports:
       - "8889:8888"
     labels:
