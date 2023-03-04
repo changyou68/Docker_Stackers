@@ -7,8 +7,6 @@ services:
     container_name: jupyter_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=1001
       - TZ=America/New_York
     volumes:
       - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work
