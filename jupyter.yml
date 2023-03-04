@@ -10,7 +10,7 @@ services:
       - PUID=1001
       - PGID=1001
       - TZ=America/New_York
-      - NB_UMASK="002"
+      - NB_UMASK=002
     volumes:
       - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work 
       # In host(lxcUbuntu20), run "usermod -aG users docker" and "chown -R docker:users" & "chmod -R 775" on fold "/mnt/ctdata/docker_shared/jupyter" after deployment. 
