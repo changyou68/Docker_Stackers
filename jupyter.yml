@@ -10,11 +10,9 @@ services:
       - PUID=1001
       - PGID=1001
       - TZ=America/New_York
-      - GRANT_SUDO=yes
-    group_add:
-      - "100"
     volumes:
-      - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work
+      - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work 
+      # run "chown -R docker" & "chgrp -R docker" & "chmod -r 777" on fold "/mnt/ctdata/docker_shared/jupyter" after deployment. 
     ports:
       - "8889:8888"
     labels:
