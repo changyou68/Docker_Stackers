@@ -10,6 +10,7 @@ services:
       - PUID=1001
       - PGID=1001
       - TZ=America/New_York
+      - GRANT_SUDO=yes
     group_add:
       - "100"
     volumes:
