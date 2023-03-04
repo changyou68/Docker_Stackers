@@ -13,7 +13,7 @@ services:
       - NB_UMASK=002
     volumes:
       - /mnt/ctdata/docker_shared/jupyter:/home/jovyan/work 
-      # In host(lxcUbuntu20), run "usermod -aG users docker" and "chown -R docker:users" & "chmod -R 775" on fold "/mnt/ctdata/docker_shared/jupyter" after deployment. 
+      # In host(lxcUbuntu20), run "usermod -aG users docker", "chown -R docker:users" & "chmod -R 775" on fold "/mnt/ctdata/docker_shared/jupyter" after deployment. 
     ports:
       - "8889:8888"
     labels:
