@@ -15,11 +15,12 @@ services:
       - TZ=America/New_York
       - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
-      - CREATE_ADMIN=1
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=test123
+      # 初次使用需要以下三個，否則無法使用
+      #- CREATE_ADMIN=1
+      #- ADMIN_USERNAME=admin
+      #- ADMIN_PASSWORD=test123
   db:
-    image: postgres:15
+    image: postgres:15.2
     environment:
       - TZ=America/New_York
       - POSTGRES_USER=miniflux
