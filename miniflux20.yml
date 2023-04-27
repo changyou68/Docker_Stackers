@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: miniflux_sub
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - TZ=America/New_York
+      - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1 # used for database migrations when postgres updraded to a new version.
+      # 初次使用需要以下三個，否則無法使用
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=Secret2023
+  
+  db:
+    image: postgres:15.2
+    container_name: postgres_sub
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=miniflux_admin
+      - POSTGRES_PASSWORD=mypassword
+      - TZ=America/New_York
+    volumes:
+      - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+      
