@@ -25,10 +25,8 @@ services:
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
     volumes:
-      - miniflux-db:/var/lib/postgresql/data
+      - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
-    volumes:
-      - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
