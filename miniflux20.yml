@@ -9,37 +9,27 @@ services:
     ports:
       - 8081:8080
     depends_on:
-      - postgres
+      db:
+        condition: service_healthy
     environment:
       - TZ=America/New_York
-      - DATABASE_URL=postgres://miniflux_admin:mypassword@postgres/miniflux?sslmode=disable
-      - RUN_MIGRATIONS=1 # used for database migrations when postgres updraded to a new version.
-      - POLLING_FREQUENCY=60
-      - ARCHIVE_READ_DAYS=30
-      - CLEANUP_FREQUENCY=30
-      # 初次使用需要以下三個，否則無法使用
-      #- CREATE_ADMIN=1
-      #- ADMIN_USERNAME=admin
-      #- ADMIN_PASSWORD=test123
-    volumes:
-      - /mnt/ctdata/docker_shared:/shared
-    networks:
-      - rss-bridge
-  
-  postgres:
-    image: postgres:15.2
-    container_name: postgres_sub
-    restart: unless-stopped
+      - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
+  db:
+    image: postgres:15
     environment:
-      - POSTGRES_USER=miniflux_admin
-      - POSTGRES_PASSWORD=mypassword
       - TZ=America/New_York
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=secret
     volumes:
-      - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
-    networks:
-      - rss-bridge
-      
-networks:
-  rss-bridge:
-    external:
-      name: rss-out # run "sudo docker network create -d bridge rss-out" first
+      - miniflux-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+   
+  volumes:
+    - /mnt/ctdata/docker_shared/postgres:/var/lib/postgresql/data
