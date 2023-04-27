@@ -21,7 +21,7 @@ services:
       - ADMIN_PASSWORD=Secret2023
   
   db:
-    image: postgres:15.2
+    image: postgres:15
     container_name: postgres_sub
     restart: unless-stopped
     environment:
