@@ -17,7 +17,7 @@ services:
       #- /mnt/sda/jellyfin/web:/media/web
       #- /mnt/sda/jellyfin/sounds:/media/sounds
       #- /mnt/sda/jellyfin/tv:/media/tv
-      - /mnt/usb_sg:/media/usb_sg
+      - /mnt/sg8t:/media/sg8t
     ports:
       - 8098:8096
       - 8922:8920 #optional
