@@ -13,10 +13,10 @@ services:
       - /home/docker/docker_shared/jellyfin/config:/config
       - /home/docker/docker_shared/jellyfin:/cache
       - /mnt/sda/jellyfin/:/media
-      - /mnt/sda/jellyfin/movies:/media/movies
-      - /mnt/sda/jellyfin/web:/media/web
-      - /mnt/sda/jellyfin/sounds:/media/sounds
-      - /mnt/sda/jellyfin/tv:/media/tv
+      #- /mnt/sda/jellyfin/movies:/media/movies
+      #- /mnt/sda/jellyfin/web:/media/web
+      #- /mnt/sda/jellyfin/sounds:/media/sounds
+      #- /mnt/sda/jellyfin/tv:/media/tv
       - /mnt/usb_sg:/media/usb_sg
     ports:
       - 8098:8096
