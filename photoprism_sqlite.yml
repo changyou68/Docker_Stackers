@@ -33,6 +33,7 @@ services:
     ## Don't enable automatic restarts until PhotoPrism has been properly configured and tested!
     ## If the service gets stuck in a restart loop, this points to a memory, filesystem, network, or database issue:
     ## https://docs.photoprism.app/getting-started/troubleshooting/#fatal-server-errors
+    container_name: photoprism_sub
     restart: unless-stopped
     stop_grace_period: 10s
     security_opt:
