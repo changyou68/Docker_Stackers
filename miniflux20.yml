@@ -21,6 +21,8 @@ services:
       #- ADMIN_PASSWORD=test123
   db:
     image: postgres:15.2
+    container_name: postgres_sub
+    restart: unless-stopped
     environment:
       - TZ=America/New_York
       - POSTGRES_USER=miniflux
