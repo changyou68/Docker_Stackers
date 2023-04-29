@@ -12,7 +12,7 @@ services:
     volumes:
       - /home/docker/docker_shared/jellyfin/config:/config
       - /home/docker/docker_shared/jellyfin:/cache
-      - /mnt/sda/jellyfin/:/media
+      - /mnt/sg2t/jellyfin/:/media
       #- /mnt/sda/jellyfin/movies:/media/movies
       #- /mnt/sda/jellyfin/web:/media/web
       #- /mnt/sda/jellyfin/sounds:/media/sounds
