@@ -1,7 +1,7 @@
 version: "3"
 services:
   guacamole:
-    image: abesnier/guacamole
+    image: abesnier/guacamole:latest
     container_name: guacamole_sub
     restart: unless-stopped
     volumes:
