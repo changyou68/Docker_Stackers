@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin_sub
     restart: unless-stopped
     user: 1001:1001
