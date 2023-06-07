@@ -1,0 +1,12 @@
+version: "2"
+services:
+  remotely:
+    image: immybot/remotely:latest
+    container_name: remotely_sub
+    restart: unless-stopped
+    ports:
+      - 5100:5000
+    volumes:
+      - /mnt/ctdata/docker_shared/remotely:/remotely-data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
