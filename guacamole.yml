@@ -4,6 +4,9 @@ services:
     image: jasonbean/guacamole:latest
     container_name: guacamole_sub
     restart: unless-stopped
+    user: "1001:1001"
+    environment:
+      TZ: "America/New_York"
     volumes:
       - /home/docker/docker_shared/guacamole:/config
     ports:
