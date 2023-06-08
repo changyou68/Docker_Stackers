@@ -1,7 +1,7 @@
 version: "3"
 services:
   guacamole:
-    image: jasonbean/guacamole:latest
+    image: jwetzell/guacamole:latest
     container_name: guacamole_sub
     restart: unless-stopped
     environment:
