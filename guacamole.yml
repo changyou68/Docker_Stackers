@@ -1,13 +1,9 @@
 version: "3"
 services:
   guacamole:
-    image: jwetzell/guacamole:latest
+    image: abesnier/guacamole:latest
     container_name: guacamole_sub
     restart: unless-stopped
-    environment:
-      - PUID=1001
-      - PGID=1001
-      - TZ="America/New_York"
     volumes:
       - /home/docker/docker_shared/guacamole:/config
     ports:
