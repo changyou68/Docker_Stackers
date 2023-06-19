@@ -12,7 +12,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /mnt/sg2t/docker_shared/jellyfin/config:/config
-      - /mnt/sg2t/docker_shared/jellyfin:/cache
+      - /home/docker/docker_shared:/cache
       - /mnt/sg2t/jellyfin/:/media
       #- /mnt/sda/jellyfin/movies:/media/movies
       #- /mnt/sda/jellyfin/web:/media/web
