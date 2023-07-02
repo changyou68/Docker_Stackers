@@ -16,5 +16,8 @@ services:
       # In host(lxcUbuntu20), run "usermod -aG users docker", "chown -R docker:users" & "chmod -R 775" on fold "/mnt/ctdata/docker_shared/jupyter" after deployment. 
     ports:
       - "8889:8888"
+      - "8891:8891"
+      - "8892:8892"
+      - "8893:8893"
     labels:
       - com.centurylinklabs.watchtower.enable=1
