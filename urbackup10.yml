@@ -11,7 +11,7 @@ services:
       - PGID=1001
       - TZ=America/New_York
     volumes:
-      - /mnt/sg8t/dockerconf/urbackup/database:/var/urbackup
+      - /mnt/sg8t/dockerconf/urbackup:/var/urbackup
       - /mnt/sg8t/urbackup:/backups
       # Uncomment the next line if you want to bind-mount the www-folder
       #- /path/to/wwwfolder:/usr/share/urbackup
