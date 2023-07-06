@@ -15,9 +15,9 @@ services:
 #      - PASS=password #optional
 #      - WHITELIST=iplist #optional
     volumes:
-      - /home/docker/docker_shared/transmission:/config
-      - /mnt/sg2t/dls:/downloads
-      - /mnt/sg2t/watch:/watch
+      - /mnt/sg8t/dockerconf/transmission:/config
+      - /mnt/sg8t/dls:/downloads
+      - /mnt/sg8t/dls/watch:/watch
     ports:
       - 9091:9091
       - 51515:51515
@@ -35,8 +35,8 @@ services:
       - WEBUI_PORT=6885
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/qbittorrent:/config
-      - /mnt/sg2t/dls:/downloads
+      - /mnt/sg8t/dockerconf/qbittorrent:/config
+      - /mnt/sg8t/dls:/downloads
     ports:
       - 34701:34701
       - 34701:34701/udp
@@ -56,8 +56,8 @@ services:
     ports:
       - 5800:5800
     volumes:
-      - /home/docker/docker_shared/JDownloader-2:/config
-      - /mnt/sg2t/dls:/output:rw
+      - /mnt/sg8t/dockerconf/JDownloader-2:/config
+      - /mnt/sg8t/dls:/output:rw
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
@@ -73,7 +73,7 @@ services:
 #       - "9999:999"
 #       - "1999:1999"
 #     volumes:
-#       - /mnt/ctdata/dls:/mnt
+#       - /mnt/sg8t/dls:/mnt
 #     labels:
 #       - com.centurylinklabs.watchtower.enable=1
 
@@ -86,7 +86,7 @@ services:
 #     - PGID=1001
 #     - TZ=America/New_York
 #   volumes:
-#     - /mnt/ctdata/dls:/data
+#     - /mnt/sg8t/dls:/data
 #   ports:
 #     - 23732:23732
 #     - 23733:23733
