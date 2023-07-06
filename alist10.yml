@@ -11,7 +11,7 @@ services:
       - UMASK=022
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/alist:/opt/alist/data
+      - /mnt/sg8t/dockerconf/alist:/opt/alist/data
     ports:
       - 5244:5244
     labels:
