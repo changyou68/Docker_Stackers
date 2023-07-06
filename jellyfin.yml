@@ -11,9 +11,9 @@ services:
     environment:
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/jellyfin:/config
-      - /home/docker/docker_shared/jellyfin:/cache
+      - /mnt/sg8t/dockerconf/jellyfin:/config
       - /mnt/sg8t/jellyfin/:/media
+      - /home/docker:/cache
       #- /mnt/sda/jellyfin/movies:/media/movies
       #- /mnt/sda/jellyfin/web:/media/web
       #- /mnt/sda/jellyfin/sounds:/media/sounds
