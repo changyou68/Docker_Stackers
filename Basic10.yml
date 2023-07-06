@@ -43,9 +43,9 @@ services:
       - PGID=1001
       - TZ=America/New_York
     volumes:
-      - /home/docker/docker_shared/syncthing:/config
+      - /mnt/sg8t/dockerconf/syncthing:/config
       - /mnt:/mnt
-      - /home:/home
+      #- /home:/home
     ports:
       - 8384:8384
       - 22000:22000/tcp
