@@ -13,6 +13,7 @@ services:
     volumes:
       - /mnt/sg8t/dockerconf/urbackup:/var/urbackup
       - /mnt/sg8t/urbackup:/backups
+      - /mnt/sg8t/urbackup/log:/var/log
       # Uncomment the next line if you want to bind-mount the www-folder
       #- /path/to/wwwfolder:/usr/share/urbackup
     # Activate the following two lines for BTRFS support
