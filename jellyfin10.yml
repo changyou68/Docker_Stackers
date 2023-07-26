@@ -2,7 +2,7 @@ version: '3.5'
 services:
   jellyfin:
     image: jellyfin/jellyfin
-    container_name: jellyfin_sub
+    container_name: jellyfin10_sub
     restart: 'unless-stopped'
     network_mode: 'host'
     user: 1001:1001
