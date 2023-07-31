@@ -8,16 +8,9 @@ services:
       - 3493:3493
     environment:
       - TZ=America/New_York
-    secrets:
-      - nut-upsd-password
+      - API_PASSWORD=upsmon_Test2023#
     devices:
       - /dev/usb/hiddev0:/dev/usb/hiddev0
     privileged: true
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-  
-secrets:
-  nut-upsd-password:
-    file: /var/adm/admin/secrets/nut-upsd-password
-#Create above file in the PVE10 host, pleacing a password for the API user in it.
-#It will be used by HomeAssistant (user="upsmon", password=content in the file just mentioned).
+    #labels:
+    #  - com.centurylinklabs.watchtower.enable=1
