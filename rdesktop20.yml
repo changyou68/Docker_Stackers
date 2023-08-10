@@ -15,8 +15,8 @@ services:
       - /mnt/ctdata/docker_shared/rdesktop:/config
     ports:
       - 3389:3389
-    devices:
-      - /dev/dri:/dev/dri #optional
+    #devices:
+      #- /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
     labels:
       - com.centurylinklabs.watchtower.enable=1
