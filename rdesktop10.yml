@@ -17,7 +17,7 @@ services:
       - 3389:3389
     devices:
       - /dev/dri:/dev/dri #optional
-    shm_size: "1gb" #optional
+    shm_size: "2gb" #optional
     #labels:
       #- com.centurylinklabs.watchtower.enable=1
   
