@@ -4,8 +4,8 @@ services:
     image: lscr.io/linuxserver/rdesktop:ubuntu-xfce
     container_name: rdesktop_sub
     restart: unless-stopped
-    security_opt:
-      - seccomp:unconfined #optional
+    #security_opt:
+      #- seccomp:unconfined #optional
     environment:
       - PUID=1001
       - PGID=1001
@@ -18,6 +18,6 @@ services:
     devices:
       - /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
+    #labels:
+      #- com.centurylinklabs.watchtower.enable=1
   
