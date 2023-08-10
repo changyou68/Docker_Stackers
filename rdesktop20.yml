@@ -4,6 +4,7 @@ services:
     image: lscr.io/linuxserver/rdesktop:ubuntu-xfce
     container_name: rdesktop_sub
     restart: unless-stopped
+    network_mode: host
     #security_opt:
       #- seccomp:unconfined #optional
     environment:
@@ -13,11 +14,9 @@ services:
     volumes:
       #- /var/run/docker.sock:/var/run/docker.sock #optional
       - /mnt/ctdata/docker_shared/rdesktop:/config
-    ports:
-      - 3389:3389
     #devices:
       #- /dev/dri:/dev/dri #optional
-    shm_size: "2gb" #optional
+    shm_size: "4gb" #optional
     #labels:
       #- com.centurylinklabs.watchtower.enable=1
   
