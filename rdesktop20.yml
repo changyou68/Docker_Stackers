@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+  rdesktop:
+    image: lscr.io/linuxserver/rdesktop:latest
+    container_name: rdesktop_sub
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock #optional
+      - /mnt/ctdata/docker_shared/rdesktop:/config
+    ports:
+      - 3389:3389
+    #devices:
+    #  - /dev/dri:/dev/dri #optional
+    shm_size: "1gb" #optional
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+  
