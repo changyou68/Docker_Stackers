@@ -11,7 +11,7 @@ services:
       - PGID=1001
       - TZ=America/New_York
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock #optional
+      #- /var/run/docker.sock:/var/run/docker.sock #optional
       - /mnt/sg8t/dockerconf/rdesktop:/config #optional
     ports:
       - 3389:3389
