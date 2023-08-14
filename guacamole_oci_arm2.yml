@@ -1,0 +1,18 @@
+#how to connect oracle cloud instances with guacamole using private key?
+#Edit the /etc/ssh/sshd_config file on the target server and add these two lines to the config:
+#    HostKeyAlgorithms +ssh-rsa
+#    PubkeyAcceptedKeyTypes +ssh-rsa
+#Then reboot sshd by sudo systemctl restart sshd
+
+version: "3"
+services:
+  guacamole:
+    image: abesnier/guacamole:latest
+    container_name: guacamole_sub
+    restart: unless-stopped
+    volumes:
+      - /home/ubuntu/dockerconf/guacamole:/config
+    ports:
+      - 443:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
