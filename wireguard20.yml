@@ -23,7 +23,7 @@ services:
       - /mnt/ctdata/docker_shared/wireguard:/config
       - /lib/modules:/lib/modules #optional
     ports:
-      - 16387:16387/udp
+      - 16387:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     labels:
