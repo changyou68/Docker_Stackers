@@ -12,7 +12,7 @@ services:
       - PGID=1001
       - TZ=America/New_York
       - SERVERURL=faith4.duckdns.org
-      - SERVERPORT=16387 #optional
+      #- SERVERPORT=16387 #optional
       - PEERS=2 #optional
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.11.11.0 #optional
