@@ -1,0 +1,31 @@
+version: "2.1"
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard_sub
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE #optional
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=America/New_York
+      - SERVERURL=faith4.duckdns.org
+      #- SERVERPORT=16389 #optional
+      - PEERS=2 #optional
+      - PEERDNS=auto #optional
+      - INTERNAL_SUBNET=10.12.12.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
+      #- PERSISTENTKEEPALIVE_PEERS= #optional
+      - LOG_CONFS=true #optional
+    volumes:
+      - /mnt/ctdata/docker_shared/wireguard:/config
+      - /lib/modules:/lib/modules #optional
+    ports:
+      - 16389:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
