@@ -20,7 +20,7 @@ services:
       #- PERSISTENTKEEPALIVE_PEERS= #optional
       - LOG_CONFS=true #optional
     volumes:
-      - /mnt/ctdata/docker_shared/wireguard:/config
+      - /mnt/sg8t/dockerconf/wireguard:/config
       - /lib/modules:/lib/modules #optional
     ports:
       - 16389:51820/udp
