@@ -7,6 +7,7 @@ services:
     container_name: shiori20_sub
     restart: unless-stopped
     environment:
+      - TZ=America/New_York
       - PUID=1001
       - PGID=1001
       - SHIORI_DIR=/data
