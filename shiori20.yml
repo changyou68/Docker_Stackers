@@ -1,3 +1,5 @@
+# https://noted.lol/tutorial-setting-up-shiori/
+
 version: "3"
 services:
   shiori:
