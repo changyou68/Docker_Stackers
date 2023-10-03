@@ -4,13 +4,15 @@ version: "3"
 services:
   shiori:
     image: ghcr.io/go-shiori/shiori
-    container_name: shiori
+    container_name: shiori20_sub
+    restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - SHIORI_DIR=/data
     ports:
-      - 8080:8080
-    restart: unless-stopped
+      - 8086:8080
     volumes:
-      - /data/shiori:/data
+      - /mnt/ctdata/docker_shared/shiori20:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
