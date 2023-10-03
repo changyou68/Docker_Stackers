@@ -12,7 +12,7 @@ services:
       - PGID=1001
       - SHIORI_DIR=/data
     ports:
-      - 8086:8080
+      - 8080:8080
     volumes:
       - /mnt/ctdata/docker_shared/shiori20:/data
     labels:
