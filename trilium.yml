@@ -4,7 +4,7 @@ services:
 
   trilium:
     container_name: trilium_sub
-    image: zadam/trilium
+    image: zadam/trilium:latest
     restart: unless-stopped
     environment:
       - TZ=America/New_York
