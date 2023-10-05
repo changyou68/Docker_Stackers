@@ -1,0 +1,15 @@
+version: '3.3' 
+services: 
+  trilium: 
+    container_name: trilium_sub
+    image: 'zadam/trilium:latest'
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - '/mnt/ctdata/docker_shared/trilium-data:/home/node/trilium-data'
+    ports:
+      - 8087:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+   
