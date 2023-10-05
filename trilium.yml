@@ -1,6 +1,8 @@
-version: '3.3' 
-services: 
-  trilium: 
+version: '3.3'
+
+services:
+
+  trilium:
     container_name: trilium_sub
     image: zadam/trilium
     restart: unless-stopped
