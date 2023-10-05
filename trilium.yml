@@ -6,8 +6,8 @@ services:
     restart: 'unless-stopped'
     environment:
       - TZ=America/New_York
-      - PUID=1001
-      - PGID=1001
+      - USER_UID=1001
+      - USER_GID=1001
     volumes:
       - /mnt/ctdata/docker_shared/trilium-data:/home/node/trilium-data
     ports:
