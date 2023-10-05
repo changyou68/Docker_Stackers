@@ -1,8 +1,9 @@
 version: '3'
 services:
   trilium:
-    container_name: trilium_sub
+    #container_name: trilium_sub
     image: zadam/trilium:latest
+    container_name: trilium_sub
     restart: 'unless-stopped'
     environment:
       - TZ=America/New_York
