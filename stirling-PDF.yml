@@ -2,7 +2,7 @@
 version: '3.3'
 services:
   stirling-pdf:
-    image: frooodle/s-pdf:latest
+    image: frooodle/s-pdf
     container_name: s-pdf_sub
     restart: unless-stopped
     environment:
@@ -11,7 +11,7 @@ services:
       - TZ=America/New_York
       - DOCKER_ENABLE_SECURITY=false
     ports:
-      - '8080:8080'
+      - '8091:8080'
     volumes:
       - /mnt/ctdata/docker_shared/s-pdf/trainingData:/usr/share/tesseract-ocr/4.00/tessdata #Required for extra OCR languages
       - /mnt/ctdata/docker_shared/s-pdf/configs:/configs
