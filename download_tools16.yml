@@ -1,0 +1,95 @@
+version: '3'
+
+services:
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - UMASK=000
+      - TZ=America/New_York
+#      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+#      - USER=username #optional
+#      - PASS=password #optional
+#      - WHITELIST=iplist #optional
+    volumes:
+      - /mnt/sgt/dockerconf/transmission:/config
+      - /mnt/sgt/dls:/downloads
+      - /mnt/sgt/dls/watch:/watch
+    ports:
+      - 9091:9091
+      - 51616:51616
+      - 51616:51616/udp
+    labels:
+      - com.centurylinklabs.watchtower.enable=1 
+  
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - WEBUI_PORT=6885
+      - TZ=America/New_York
+    volumes:
+      - /mnt/sgt/dockerconf/qbittorrent:/config
+      - /mnt/sgt/dls:/downloads
+    ports:
+      - 34706:34706
+      - 34706:34706/udp
+      - 6885:6885
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+      
+#  jdownloader-2:
+#    image: jlesage/jdownloader-2
+#    container_name: jdownloader-2_sub
+#    restart: unless-stopped
+#    environment:
+#      - USER_ID=1001
+#      - GROUP_ID=1001
+#      - TZ=America/New_York
+#      - ENABLE_CJK_FONT=1
+#    ports:
+#      - 5800:5800
+#    volumes:
+#      - /mnt/sgt/dockerconf/JDownloader-2:/config
+#      - /mnt/sgt/dls:/output:rw
+#    labels:
+#      - com.centurylinklabs.watchtower.enable=1
+
+#   baidupcs:
+#     image: auska/docker-baidupcs
+#     container_name: baidupcs_sub
+#     restart: unless-stopped
+#     environment:
+#       - PGID=1001
+#       - PUID=1001
+#       - TZ=America/New_York
+#     ports:
+#       - "9999:999"
+#       - "1999:1999"
+#     volumes:
+#       - /mnt/sgt/dls:/mnt
+#     labels:
+#       - com.centurylinklabs.watchtower.enable=1
+
+# emule-docker:
+#   image: xhip/emule-docker
+#   container_name: emule-docker_sub
+#   restart: unless-stopped
+#   environment:
+#     - PUID=1001
+#     - PGID=1001
+#     - TZ=America/New_York
+#   volumes:
+#     - /mnt/sgt/dls:/data
+#   ports:
+#     - 23732:23732
+#     - 23733:23733
+#     - 4711:4711
+#   labels:
+#     - com.centurylinklabs.watchtower.enable=1
