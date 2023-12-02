@@ -36,14 +36,14 @@ services:
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing_sub
-    hostname: syncthing10
+    hostname: syncthing16
     restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
       - TZ=America/New_York
     volumes:
-      - /mnt/sg8t/dockerconf/syncthing:/config
+      - /mnt/sgt/dockerconf/syncthing:/config
       - /mnt:/mnt
       #- /home:/home
     ports:
