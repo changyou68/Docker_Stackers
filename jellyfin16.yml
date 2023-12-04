@@ -13,7 +13,8 @@ services:
       #- JELLYFIN_PublishedServerUrl=http://jellyfin10.org
     volumes:
       - /mnt/sgt/dockerconf/jellyfin:/config
-      - /mnt/sgt/jellyfin/:/media
+      - /mnt/sgt/jellyfin:/media/sgt
+      - /mnt/hg10t/jellyfin:/media/hg10
       - /home/docker:/cache
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
