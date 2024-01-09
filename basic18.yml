@@ -36,7 +36,7 @@ services:
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing_sub
-    hostname: syncthing16
+    hostname: syncthing18
     restart: unless-stopped
     environment:
       - PUID=1001
