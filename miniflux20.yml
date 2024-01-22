@@ -22,7 +22,7 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=1
   db:
-    image: postgres:15.5
+    image: postgres:15
     container_name: postgres_sub
     restart: unless-stopped
     environment:
