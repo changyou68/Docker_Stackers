@@ -22,6 +22,6 @@ services:
     devices:
       # VAAPI Devices
       - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card
+      - /dev/dri/card0:/dev/dri/card0
 #    labels:
 #      - com.centurylinklabs.watchtower.enable=1
