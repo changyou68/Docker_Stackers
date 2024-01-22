@@ -1,7 +1,7 @@
 version: '3'
 services:
   trilium:
-    image: "zadam/trilium:latest"
+    image: "zadam/trilium:0.63.1-beta"
     container_name: trilium_sub
     restart: 'unless-stopped'
     environment:
