@@ -1,0 +1,17 @@
+version: "3"
+services:
+  miniboard:
+    container_name: miniboard_sub
+    image: aceberg/miniboard
+    restart: unless-stopped
+    ports:
+    - 8849:8849
+    volumes:
+    - /mnt/ctdata/dockerconf/miniboard:/data/miniboard       # app data (set your own path instead of dockerdata)
+    environment:
+      HOST: "0.0.0.0"         # optional, default: 0.0.0.0
+      THEME: "flatly"         # optional, default: flatly
+      COLOR: "dark"           # optional, default: dark
+      TZ: "America/New_York"
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
