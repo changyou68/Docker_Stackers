@@ -26,6 +26,8 @@ services:
       - 16389:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.proxy_arp=1
     labels:
       - com.centurylinklabs.watchtower.enable=1
       
