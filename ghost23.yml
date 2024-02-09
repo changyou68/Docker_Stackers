@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:5-alpine
+    container_name: ghost_sub
+    restart: unless-stopped
+    ports:
+      - 2368:2368
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/New_York
+      # see https://ghost.org/docs/config/#configuration-options
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: Ygs2:KUJW<)!Zn?;qG=*5E
+      database__connection__database: ghost
+      # this url value is just an example, and is likely wrong for your environment!
+      # url: http://localhost:8080
+      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+      # NODE_ENV: development
+    volumes:
+      - /mnt/sgt/dockerconf/ghost:/var/lib/ghost/content
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_sub
+    restart: unless-stopped
+    environment:
+      PUID: 1001
+      PGID: 1001
+      TZ: America/New_York
+      MYSQL_ROOT_PASSWORD: Ygs2:KUJW<)!Zn?;qG=*5E
+    volumes:
+      - /mnt/sgt/dockerconf/ghost/db:/var/lib/mysql
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+    
