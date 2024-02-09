@@ -1,0 +1,17 @@
+version: '3'
+services:
+  trilium:
+    image: "zadam/trilium:0.63.1-beta"
+    container_name: trilium_sub
+    restart: 'unless-stopped'
+    environment:
+      - TZ=America/New_York
+      - USER_UID=1001
+      - USER_GID=1001
+    volumes:
+      - /mnt/sgt/dockerconf/trilium-data:/home/node/trilium-data
+    ports:
+      - 8087:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+   
