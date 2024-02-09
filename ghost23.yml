@@ -37,7 +37,7 @@ services:
       TZ: America/New_York
       MYSQL_ROOT_PASSWORD: Ygs2:KUJW<)!Zn?;qG=*5E
     volumes:
-      - /mnt/sgt/dockerconf/ghost/db:/var/lib/mysql
+      - /mnt/sgt/dockerconf/mysql:/var/lib/mysql
     labels:
       - com.centurylinklabs.watchtower.enable=1
     
