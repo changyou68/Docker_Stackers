@@ -7,7 +7,7 @@ services:
     environment:
       - TZ=America/New_York
       - USER_UID=1001
-      - USER_GID=1001
+      - USER_GID=10001
     volumes:
       - /mnt/sgt/dockerconf/trilium-data:/home/node/trilium-data
     ports:
