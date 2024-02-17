@@ -9,7 +9,7 @@ services:
       - SYS_MODULE #optional
     environment:
       - PUID=1001
-      - PGID=1001
+      - PGID=10001
       - TZ=America/New_York
       - SERVERURL=faith4.duckdns.org
       #- SERVERPORT=16389 #optional
