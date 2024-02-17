@@ -10,7 +10,7 @@ services:
       - 2368:2368
     environment:
       PUID: 1001
-      PGID: 1001
+      PGID: 10001
       TZ: America/New_York
       # see https://ghost.org/docs/config/#configuration-options
       database__client: mysql
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
       PUID: 1001
-      PGID: 1001
+      PGID: 10001
       TZ: America/New_York
       MYSQL_ROOT_PASSWORD: Ygs2:KUJW<)!Zn?;qG=*5E
     volumes:
