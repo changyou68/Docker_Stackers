@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  pixman:
+    image: pixman/pixman
+    container_name: pixman23_sub
+    restart: 'unless-stopped'
+    environment:
+      - TZ=America/New_York
+#      - http_proxy=http://192.168.50.50:7890
+#      - https_proxy=http://192.168.50.50:7890
+#      - MYTVSUPER_TOKEN=YOUR_TOKEN
+    ports:
+      - 5050:5000
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
