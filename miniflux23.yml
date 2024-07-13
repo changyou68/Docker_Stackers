@@ -16,9 +16,9 @@ services:
       - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
       # 初次使用需要以下三個，否則無法使用
-      #- CREATE_ADMIN=1
-      #- ADMIN_USERNAME=admin
-      #- ADMIN_PASSWORD=test123
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
     labels:
       - com.centurylinklabs.watchtower.enable=1
   db:
