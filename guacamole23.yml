@@ -11,7 +11,7 @@ services:
     container_name: guacamole_sub
     restart: unless-stopped
     volumes:
-      - - /mnt/sgt/dockerconf/guacamole:/config
+      - /mnt/sgt/dockerconf/guacamole:/config
     ports:
       - 5000:8080
     labels:
