@@ -13,6 +13,6 @@ services:
     volumes:
       - /home/ubuntu/dockerconf/guacamole:/config
     ports:
-      - 8080:8080
+      - 80:8080
     labels:
       - com.centurylinklabs.watchtower.enable=1
