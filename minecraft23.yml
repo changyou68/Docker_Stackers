@@ -17,6 +17,7 @@ services:
       PUID: "1001"
       PGID: "10001"
       TZ: "America/New_York"
+      MEMORY: "2G"
       SERVERNAME: "YUCHENG'S WORLD"
       RCON_PASSWORD: "Testing1076"
     volumes:
