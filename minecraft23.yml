@@ -17,6 +17,8 @@ services:
       PUID: "1001"
       PGID: "10001"
       TZ: "America/New_York"
+      SERVERNAME: "YUCHENG'S WORLD"
+      RCON_PASSWORD: "Testing1076"
     volumes:
       # attach the relative directory 'data' to the container's /data path
       - /mnt/sgt/dockerconf/minecraft:/data
