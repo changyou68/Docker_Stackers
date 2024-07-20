@@ -5,7 +5,7 @@ services:
     # Container Image on dockerhub 
     image: itzg/minecraft-server
     container_name: minecraft_sub
-    restart: on-failure:3
+    restart: unless-stopped
     tty: true
     stdin_open: true
     # Port Mappings
