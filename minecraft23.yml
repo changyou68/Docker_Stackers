@@ -22,7 +22,7 @@ services:
       RCON_PASSWORD: "Testing1076"
       KEEPINVENTORY: "TRUE"
     OPS: |
-      user1
+      changyou68
       user2
     volumes:
       # attach the relative directory 'data' to the container's /data path
