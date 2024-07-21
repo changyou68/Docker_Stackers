@@ -21,9 +21,9 @@ services:
       SERVERNAME: "Canyon Shadow"
       RCON_PASSWORD: "Testing1076"
       KEEPINVENTORY: "TRUE"
-    OPS: |
-      changyou68
-      user2
+      OPS: |
+        changyou68
+        user2
     volumes:
       # attach the relative directory 'data' to the container's /data path
       - /mnt/sgt/dockerconf/minecraft:/data
