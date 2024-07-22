@@ -18,11 +18,11 @@ services:
       PGID: "10001"
       TZ: "America/New_York"
       MEMORY: "6G"
-      SERVERNAME: "Canyon Shadow"
+      SERVERNAME: "OCI Mine"
       RCON_PASSWORD: "Rcon2012"
     volumes:
       # attach the relative directory 'data' to the container's /data path
-      - /mnt/sgt/dockerconf/minecraft:/data
+      - /home/ubuntu/dockerconf/minecraft:/data
     labels:
       - com.centurylinklabs.watchtower.enable=1 
   
