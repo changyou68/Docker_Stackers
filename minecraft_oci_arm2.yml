@@ -14,8 +14,6 @@ services:
     # Environment Variables
     environment:
       EULA: "TRUE"
-      PUID: "1001"
-      PGID: "10001"
       TZ: "America/New_York"
       MEMORY: "6G"
       SERVERNAME: "OCI Mine"
