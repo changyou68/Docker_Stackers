@@ -1,13 +1,14 @@
 version: '3'
 services:
   trilium:
-    image: "zadam/trilium:0.63-latest"
-    container_name: trilium_sub
+    image: triliumnext/notes:latest
+    container_name: triliumnext_sub
     restart: 'unless-stopped'
     environment:
       - TZ=America/New_York
       - USER_UID=1001
       - USER_GID=10001
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
     volumes:
       - /mnt/sgt/dockerconf/trilium-data:/home/node/trilium-data
     ports:
