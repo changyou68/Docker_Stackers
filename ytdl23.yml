@@ -29,7 +29,7 @@ services:
       - GID=10001
       - TZ=America/New_York
       - YTDL_OPTIONS={"writesubtitles":true, "subtitleslangs":["en", "-live_chat"]}
-      - OUTPUT_TEMPLATE={/downloads/%(channel)s/%(title).60s.%(ext)s}
+      - OUTPUT_TEMPLATE=/downloads/%(channel)s/%(title).60s.%(ext)s
     ports:
       - "8085:8081"
     volumes:
