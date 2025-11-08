@@ -44,5 +44,5 @@ services:
     ports:
       - "4005:4005"
     volumes:
-      - ./postgresus-data:/postgresus-data
+      - /mnt/sgt/dockerconf/postgresus-data:/postgresus-data
     
