@@ -35,3 +35,14 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
+  postgresus:
+    container_name: postgresus_sub
+    image: rostislavdugin/postgresus:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "4005:4005"
+    volumes:
+      - ./postgresus-data:/postgresus-data
+    
