@@ -29,6 +29,8 @@ services:
       - TZ=America/New_York
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
     volumes:
       - /mnt/sgt/dockerconf/postgres:/var/lib/postgresql/data
     healthcheck:
