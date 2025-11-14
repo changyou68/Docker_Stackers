@@ -11,8 +11,8 @@ services:
 #      - youtubedl_webuiport=8082
       - youtubedl_interval=1h
       - youtubedl_quality=720
-      - PUID=1001
-      - PGID=10001
+      - UID=101001
+      - GID=110001
       - TZ=America/New_York
     volumes:
       - /mnt/spcc4t/Dockers/dockerconf/youtube-dl:/config
@@ -25,8 +25,8 @@ services:
     container_name: metube_sub
     restart: unless-stopped
     environment:
-      - UID=1001
-      - GID=10001
+      - UID=101001
+      - GID=110001
       - TZ=America/New_York
       - YTDL_OPTIONS={"writesubtitles":true, "subtitleslangs":["en", "-live_chat"]}
       - OUTPUT_TEMPLATE=/downloads/%(channel)s/%(title).60s.%(ext)s
@@ -42,8 +42,8 @@ services:
   #  container_name: youtubedl-material_sub
   #  restart: unless-stopped
   #  environment: 
-  #    UID: 1001
-  #    GID: 10001
+  #    UID: 101001
+  #    GID: 110001
   #    TZ: 'America/New_York'
   #    ALLOW_CONFIG_MUTATIONS: 'true'
   #    #ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
@@ -67,8 +67,8 @@ services:
   #  container_name: mongo-db
   #  restart: unless-stopped
   #  environment: 
-  #    UID: 1001
-  #    GID: 10001
+  #    UID: 101001
+  #    GID: 110001
   #    TZ: 'America/New_York'
   #  ports:
   #    - "27017:27017"
