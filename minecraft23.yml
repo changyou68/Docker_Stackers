@@ -14,10 +14,10 @@ services:
     # Environment Variables
     environment:
       EULA: "TRUE"
-      PUID: "1001"
-      PGID: "10001"
+      PUID: "101001"
+      PGID: "110001"
       TZ: "America/New_York"
-      MEMORY: "6G"
+      MEMORY: "5G"
       SERVERNAME: "Canyon Shadow"
       RCON_PASSWORD: "Rcon2012"
     volumes:
