@@ -15,8 +15,8 @@ services:
       - PGID=10001
       - TZ=America/New_York
     volumes:
-      - /mnt/sgt/dockerconf/youtube-dl:/config
-      - /mnt/sgt/ytdl:/downloads
+      - /mnt/spcc4t/Dockers/dockerconf/youtube-dl:/config
+      - /mnt/spcc4t/Dockers/ytdl:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
@@ -33,7 +33,7 @@ services:
     ports:
       - "8085:8081"
     volumes:
-      - /mnt/sgt/ytdl/Metu:/downloads
+      - /mnt/spcc4t/Dockers/ytdl/Metu:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
