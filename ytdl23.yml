@@ -13,8 +13,8 @@ services:
       - youtubedl_quality=720
       - PUID=101001
       - PGID=110001
-      - UID=101001
-      - GID=110001
+#      - UID=101001
+#      - GID=110001
       - TZ=America/New_York
     volumes:
       - /mnt/spcc4t/Dockers/dockerconf/youtube-dl:/config
