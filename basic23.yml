@@ -3,7 +3,7 @@ version: '3'
 services:
 
   watchtower:
-    image: containrrr/watchtower
+    image: nickfedor/watchtower:latest
     container_name: watchtower_sub
     restart: unless-stopped
     environment:
@@ -39,8 +39,8 @@ services:
     hostname: syncthing23 #optional
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - TZ=America/New_York
     volumes:
       - /mnt/spcc4t/Dockers/dockerconf/syncthing:/config
@@ -58,8 +58,8 @@ services:
     container_name: resilio-sync_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - TZ=America/New_York
     volumes:
       - /mnt/spcc4t/Dockers/dockerconf/resilio-sync:/config
