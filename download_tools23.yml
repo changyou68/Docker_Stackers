@@ -6,8 +6,8 @@ services:
     container_name: transmission_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - UMASK=000
       - TZ=America/New_York
 #      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
@@ -15,9 +15,9 @@ services:
 #      - PASS=password #optional
 #      - WHITELIST=iplist #optional
     volumes:
-      - /mnt/sgt/dockerconf/transmission:/config
-      - /mnt/sgt/dls:/downloads
-      - /mnt/sgt/dls/watch:/watch
+      - /mnt/spcc4t/Dockers/dockerconf/transmission:/config
+      - /mnt/spcc4t/Dockers/dls:/downloads
+      - /mnt/spcc4t/Dockers/dls/watch:/watch
     ports:
       - 9091:9091
       - 51618:51618
@@ -30,13 +30,13 @@ services:
     container_name: qbittorrent_sub
     restart: unless-stopped
     environment:
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - WEBUI_PORT=6885
       - TZ=America/New_York
     volumes:
-      - /mnt/sgt/dockerconf/qbittorrent:/config
-      - /mnt/sgt/dls:/downloads
+      - /mnt/spcc4t/Dockers/dockerconf/qbittorrent:/config
+      - /mnt/spcc4t/Dockers/dls:/downloads
     ports:
       - 34706:34706
       - 34706:34706/udp
