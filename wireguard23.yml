@@ -8,8 +8,8 @@ services:
       - NET_ADMIN
       - SYS_MODULE #optional
     environment:
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - TZ=America/New_York
       - SERVERURL=faith4.duckdns.org
       #- SERVERPORT=16389 #optional
@@ -20,7 +20,7 @@ services:
       #- PERSISTENTKEEPALIVE_PEERS= #optional
       - LOG_CONFS=true #optional
     volumes:
-      - /mnt/sgt/dockerconf/wireguard:/config
+      - /mnt/spcc4t/Dockers/dockerconf/wireguard:/config
       - /lib/modules:/lib/modules #optional
     ports:
       - 16389:51820/udp
