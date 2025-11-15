@@ -8,12 +8,12 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/New_York
-      - PUID=1001
-      - PGID=10001
+      - PUID=101001
+      - PGID=110001
       - SHIORI_DIR=/data
     ports:
       - 8086:8080
     volumes:
-      - /mnt/sgt/dockerconf/shiori:/data
+      - /mnt/spcc4t/Dockers/dockerconf/shiori:/data
     labels:
       - com.centurylinklabs.watchtower.enable=1
