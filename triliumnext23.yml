@@ -6,11 +6,11 @@ services:
     restart: 'unless-stopped'
     environment:
       - TZ=America/New_York
-      - USER_UID=1001
-      - USER_GID=10001
+      - USER_UID=101001
+      - USER_GID=110001
       - TRILIUM_DATA_DIR=/home/node/trilium-data
     volumes:
-      - /mnt/sgt/dockerconf/trilium-data:/home/node/trilium-data
+      - /mnt/spcc4t/Dockers/dockerconf/trilium-data:/home/node/trilium-data
     ports:
       - 8087:8080
     labels:
