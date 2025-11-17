@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  minecraft:
+    # Container Image on dockerhub 
+    image: itzg/minecraft-server
+    container_name: minecraft_sub
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    # Port Mappings
+    ports:
+      - "25565:25565"
+    # Environment Variables
+    environment:
+      EULA: "TRUE"
+      UID: "1001"
+      GID: "10001"
+      TZ: "America/New_York"
+      MEMORY: "5G"
+      SERVERNAME: "Canyon Shadow"
+      RCON_PASSWORD: "Rcon2012"
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - /mnt/Dockers/dockerconf/minecraft:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1 
+  
