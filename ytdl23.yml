@@ -17,8 +17,8 @@ services:
 #      - GID=110001
       - TZ=America/New_York
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/youtube-dl:/config
-      - /mnt/spcc4t/Dockers/ytdl:/downloads
+      - /mnt/Dockers/dockerconf/youtube-dl:/config
+      - /mnt/Dockers/ytdl:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
@@ -35,7 +35,7 @@ services:
     ports:
       - "8085:8081"
     volumes:
-      - /mnt/spcc4t/Dockers/ytdl/Metu:/downloads
+      - /mnt/Dockers/ytdl/Metu:/downloads
     labels:
       - com.centurylinklabs.watchtower.enable=1
 
