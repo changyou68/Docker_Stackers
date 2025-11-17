@@ -14,6 +14,6 @@ services:
     ports:
       - 8086:8080
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/shiori:/data
+      - /mnt/Dockers/dockerconf/shiori:/data
     labels:
       - com.centurylinklabs.watchtower.enable=1
