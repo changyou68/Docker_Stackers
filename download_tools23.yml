@@ -15,9 +15,9 @@ services:
 #      - PASS=password #optional
 #      - WHITELIST=iplist #optional
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/transmission:/config
-      - /mnt/spcc4t/Dockers/dls:/downloads
-      - /mnt/spcc4t/Dockers/dls/watch:/watch
+      - /mnt/Dockers/dockerconf/transmission:/config
+      - /mnt/Dockers/dls:/downloads
+      - /mnt/Dockers/dls/watch:/watch
     ports:
       - 9091:9091
       - 51618:51618
@@ -35,8 +35,8 @@ services:
       - WEBUI_PORT=6885
       - TZ=America/New_York
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/qbittorrent:/config
-      - /mnt/spcc4t/Dockers/dls:/downloads
+      - /mnt/Dockers/dockerconf/qbittorrent:/config
+      - /mnt/Dockers/dls:/downloads
     ports:
       - 34706:34706
       - 34706:34706/udp
