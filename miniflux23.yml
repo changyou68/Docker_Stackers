@@ -32,7 +32,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/postgres:/var/lib/postgresql/data
+      - /mnt/Dockers/dockerconf/postgres:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
@@ -46,5 +46,5 @@ services:
     ports:
       - "4005:4005"
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/postgresus-data:/postgresus-data
+      - /mnt/Dockers/dockerconf/postgresus-data:/postgresus-data
     
