@@ -1,0 +1,19 @@
+# https://noted.lol/tutorial-setting-up-shiori/
+
+version: "3"
+services:
+  shiori:
+    image: ghcr.io/go-shiori/shiori
+    container_name: shiori_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - PUID=1001
+      - PGID=10001
+      - SHIORI_DIR=/data
+    ports:
+      - 8086:8080
+    volumes:
+      - /mnt/Dockers/dockerconf/shiori:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
