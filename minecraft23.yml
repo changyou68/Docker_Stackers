@@ -22,7 +22,7 @@ services:
       RCON_PASSWORD: "Rcon2012"
     volumes:
       # attach the relative directory 'data' to the container's /data path
-      - /mnt/spcc4t/Dockers/dockerconf/minecraft:/data
+      - /mnt/Dockers/dockerconf/minecraft:/data
     labels:
       - com.centurylinklabs.watchtower.enable=1 
   
