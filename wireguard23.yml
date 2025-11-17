@@ -20,7 +20,7 @@ services:
       #- PERSISTENTKEEPALIVE_PEERS= #optional
       - LOG_CONFS=true #optional
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/wireguard:/config
+      - /mnt/Dockers/dockerconf/wireguard:/config
       - /lib/modules:/lib/modules #optional
     ports:
       - 16389:51820/udp
