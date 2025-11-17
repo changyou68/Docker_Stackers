@@ -7,7 +7,7 @@ services:
     ports:
     - 8849:8849
     volumes:
-    - /mnt/spcc4t/Dockers/dockerconf/miniboard:/data/miniboard       # app data (set your own path instead of dockerdata)
+    - /mnt/Dockers/dockerconf/miniboard:/data/miniboard       # app data (set your own path instead of dockerdata)
     environment:
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0
       THEME: "flatly"         # optional, default: flatly
