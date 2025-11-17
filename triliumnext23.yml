@@ -10,7 +10,7 @@ services:
       - USER_GID=110001
       - TRILIUM_DATA_DIR=/home/node/trilium-data
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/trilium-data:/home/node/trilium-data
+      - /mnt/Dockers/dockerconf/trilium-data:/home/node/trilium-data
     ports:
       - 8087:8080
     labels:
