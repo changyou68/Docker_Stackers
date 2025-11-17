@@ -43,7 +43,7 @@ services:
       - PGID=110001
       - TZ=America/New_York
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/syncthing:/config
+      - /mnt/Dockers/dockerconf/syncthing:/config
       - /mnt:/mnt
     ports:
       - 8384:8384
@@ -62,9 +62,9 @@ services:
       - PGID=110001
       - TZ=America/New_York
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/resilio-sync:/config
-      - /mnt/spcc4t/Dockers/phones:/downloads
-      - /mnt/spcc4t/Dockers:/sync
+      - /mnt/Dockers/dockerconf/resilio-sync:/config
+      - /mnt/Dockers/phones:/downloads
+      - /mnt/Dockers:/sync
     ports:
       - 8888:8888
       - 55555:55555
