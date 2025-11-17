@@ -1,0 +1,82 @@
+version: '3'
+
+services:
+
+  Jeeaaasus-youtube-dl:
+    image: jeeaaasustest/youtube-dl
+    container_name: youtube-dl_sub
+    restart: unless-stopped
+    environment:
+#      - youtubedl_webui=true
+#      - youtubedl_webuiport=8082
+      - youtubedl_interval=1h
+      - youtubedl_quality=720
+      - PUID=1001
+      - PGID=10001
+#      - UID=101001
+#      - GID=110001
+      - TZ=America/New_York
+    volumes:
+      - /mnt/Dockers/dockerconf/youtube-dl:/config
+      - /mnt/Dockers/ytdl:/downloads
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  metube:
+    image: alexta69/metube
+    container_name: metube_sub
+    restart: unless-stopped
+    environment:
+      - UID=1001
+      - GID=10001
+      - TZ=America/New_York
+      - YTDL_OPTIONS={"writesubtitles":true, "subtitleslangs":["en", "-live_chat"]}
+      - OUTPUT_TEMPLATE=/downloads/%(channel)s/%(title).60s.%(ext)s
+    ports:
+      - "8085:8081"
+    volumes:
+      - /mnt/Dockers/ytdl/Metu:/downloads
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+
+  #ytdl_material:
+  #  image: tzahi12345/youtubedl-material:latest
+  #  container_name: youtubedl-material_sub
+  #  restart: unless-stopped
+  #  environment: 
+  #    UID: 101001
+  #    GID: 110001
+  #    TZ: 'America/New_York'
+  #    ALLOW_CONFIG_MUTATIONS: 'true'
+  #    #ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
+  #    ytdl_use_local_db: 'true'
+  #    write_ytdl_config: 'true'
+  #  #depends_on:
+  #    #- ytdl-mongo-db
+  #  ports:
+  #    - "8998:17442"
+  #  volumes:
+  #    - /mnt/sg2t/ytdl/appdata:/app/appdata
+  #    - /mnt/sg2t/ytdl/audio:/app/audio
+  #    - /mnt/sg2t/ytdl/video:/app/video
+  #    - /mnt/sg2t/ytdl/subscriptions:/app/subscriptions
+  #    - /mnt/sg2t/ytdl/users:/app/users
+  #  labels:
+  #    - com.centurylinklabs.watchtower.enable=1
+      
+  #ytdl-mongo-db:
+  #  image: mongo
+  #  container_name: mongo-db
+  #  restart: unless-stopped
+  #  environment: 
+  #    UID: 101001
+  #    GID: 110001
+  #    TZ: 'America/New_York'
+  #  ports:
+  #    - "27017:27017"
+  #  logging:
+  #    driver: "none"          
+  #  volumes:
+  #    - /mnt/sg2t/ytdl/db:/data/db
+  #  labels:
+  #    - com.centurylinklabs.watchtower.enable=1
