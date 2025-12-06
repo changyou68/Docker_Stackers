@@ -47,4 +47,6 @@ services:
       - "4005:4005"
     volumes:
       - /mnt/Dockers/dockerconf/postgresus-data:/postgresus-data
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
     
