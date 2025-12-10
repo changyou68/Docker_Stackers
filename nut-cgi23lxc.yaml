@@ -1,0 +1,13 @@
+version: "3"
+services:
+  nutcgi:
+    image: danchal/nut-cgi
+    container_name: nut-cgi_sub
+    environment:
+      - TZ=America/New_York
+      - NUT_HOSTS=MONITOR apcups@192.168.30.30 "The APC Back-UPS BE1050G3"
+    restart: unless-stopped
+    ports:
+      - 6544:80
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
