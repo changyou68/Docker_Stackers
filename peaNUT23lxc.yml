@@ -1,0 +1,14 @@
+services:
+  peanut:
+    image: brandawg93/peanut:latest
+    container_name: PeaNUT_sub
+    restart: unless-stopped
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 8180:8080
+    environment:
+      - TZ=America/New_York
+      - WEB_PORT=8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
