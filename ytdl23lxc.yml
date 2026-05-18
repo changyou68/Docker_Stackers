@@ -54,7 +54,7 @@ services:
   #  #depends_on:
   #    #- ytdl-mongo-db
   #  ports:
-  #    - "8998:17442"
+  #    - 8998:17442
   #  volumes:
   #    - /mnt/sg2t/ytdl/appdata:/app/appdata
   #    - /mnt/sg2t/ytdl/audio:/app/audio
@@ -73,7 +73,7 @@ services:
   #    GID: 110001
   #    TZ: 'America/New_York'
   #  ports:
-  #    - "27017:27017"
+  #    - 27017:27017
   #  logging:
   #    driver: "none"          
   #  volumes:
