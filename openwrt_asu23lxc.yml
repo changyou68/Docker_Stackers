@@ -26,4 +26,4 @@ services:
     container_name: asu-redis
     restart: unless-stopped
     volumes:
-      - ./redis-data:/data
+      - /mnt/Dockers/dockerconf/redis-data:/data
