@@ -5,14 +5,19 @@ services:
     image: openwrtorg/asu:latest
     container_name: openwrt-asu
     restart: unless-stopped
-    ports:
-      - "8080:80"        # Web UI
     environment:
+      - PUID=1001
+      - PGID=10001
+      - TZ=America/New_York
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - ASU_CACHE_DIR=/cache
     volumes:
-      - /mnt/spcc4t/Dockers/dockerconf/asu:/cache
+      - /mnt/Dockers/dockerconf/asu:/cache
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
+    ports:
+      - "8026:80"        # Web UI
     depends_on:
       - redis
 
