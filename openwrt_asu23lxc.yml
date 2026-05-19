@@ -6,7 +6,7 @@ services:
     container_name: openwrt-asu_sub
     restart: unless-stopped
     ports:
-      - "8026:80"        # Web UI
+      - "8026:8000"        # Web UI
     environment:
       - PUID=1001
       - PGID=10001
