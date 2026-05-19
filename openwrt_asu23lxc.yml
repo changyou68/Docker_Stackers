@@ -2,9 +2,11 @@ version: "3.8"
 
 services:
   asu:
-    image: openwrtorg/asu:latest
-    container_name: openwrt-asu
+    image: openwrt/asu:latest
+    container_name: openwrt-asu_sub
     restart: unless-stopped
+    ports:
+      - "8026:80"        # Web UI
     environment:
       - PUID=1001
       - PGID=10001
@@ -14,12 +16,10 @@ services:
       - ASU_CACHE_DIR=/cache
     volumes:
       - /mnt/Dockers/dockerconf/asu:/cache
-    labels:
-      - com.centurylinklabs.watchtower.enable=1
-    ports:
-      - "8026:80"        # Web UI
     depends_on:
       - redis
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
 
   redis:
     image: redis:7-alpine
