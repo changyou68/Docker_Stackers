@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  openwrt-imagebuilder:
+    image: openwrt/imagebuilder:x86-64-latest  # Change to your target, e.g., armvirt-64-latest
+    container_name: openwrt_imagebuilder_sub
+    stdin_open: true
+    tty: true
+    working_dir: /builder
+    volumes:
+      - ./builder:/builder   # Local directory for configs and output
+    environment:
+      - TZ=UTC               # Set timezone if needed
+    command: /bin/sh         # Start shell so you can run make commands interactively
