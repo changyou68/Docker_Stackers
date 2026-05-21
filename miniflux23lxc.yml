@@ -29,7 +29,6 @@ services:
       - TZ=America/New_York
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=miniflux
     ports:
       - "5432:5432"
     volumes:
