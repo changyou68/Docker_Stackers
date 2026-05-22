@@ -38,6 +38,8 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
 
   databasus:
     image: databasus/databasus:latest
