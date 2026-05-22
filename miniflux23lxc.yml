@@ -38,17 +38,17 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
-  
-  postgresus:
-    container_name: postgresus_sub
-    image: rostislavdugin/postgresus:latest
+
+  databasus:
+    image: databasus/databasus:latest
+    container_name: databasus_sub
     restart: unless-stopped
     environment:
       - TZ=America/New_York
     ports:
       - "4005:4005"
     volumes:
-      - /mnt/Dockers/dockerconf/postgresus-data:/postgresus-data
+      - /mnt/Dockers/dockerconf/databasus-data:/databasus-data
     labels:
       - com.centurylinklabs.watchtower.enable=1
     
