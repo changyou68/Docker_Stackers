@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+
+  db:
+    image: postgres:18-trixie
+    container_name: postgres_sub
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - /mnt/Dockers/dockerconf/postgres:/var/lib/postgresql
