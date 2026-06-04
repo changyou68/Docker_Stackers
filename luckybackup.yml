@@ -1,0 +1,18 @@
+version: '3'
+services:
+  luckybackup:
+    image: ich777/luckybackup:latest
+    container_name: luckybackup_sub
+    restart: unless-stopped
+    environment:
+      - PUID=1001
+      - PGID=10001
+      - TZ=America/New_York
+    volumes:
+      - /mnt/Dockers/dockerconf/luckybackup:/luckybackup
+      - /mnt/Dockers/source:/data/source:ro
+      - /mnt/Dockers/destination:/data/destination
+    ports:
+      - 8388:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=1
